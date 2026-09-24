@@ -181,34 +181,36 @@ export const ClientLayout: React.FC = () => {
       </div>
 
       {/* Mobile Floating Bottom Navigation Bar (Exact Liquid Glass Effect) */}
-      <nav
-        ref={navRef}
-        onPointerMove={handlePointerMove}
-        aria-label="Mobile Navigation"
-        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav z-50 md:hidden"
-      >
-        {/* Sliding Thumb */}
-        <span
-          className="glass-thumb pointer-events-none"
-          style={{
-            transform: `translateX(calc(${activeIndex} * 100%))`,
-            width: `calc((100% - 6px) / ${mobileBottomNavItems.length})`,
-          }}
-        />
+      <div className="glass-nav-fixed md:hidden">
+        <nav
+          ref={navRef}
+          onPointerMove={handlePointerMove}
+          aria-label="Mobile Navigation"
+          className="glass-nav"
+        >
+          {/* Sliding Thumb */}
+          <span
+            className="glass-thumb pointer-events-none"
+            style={{
+              transform: `translateX(calc(${activeIndex} * 100%))`,
+              width: `calc((100% - 6px) / ${mobileBottomNavItems.length})`,
+            }}
+          />
 
-        {mobileBottomNavItems.map((item, idx) => {
-          const isActive = activeIndex === idx;
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn('glass-label', isActive && 'on')}
-            >
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
+          {mobileBottomNavItems.map((item, idx) => {
+            const isActive = activeIndex === idx;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn('glass-label', isActive && 'on')}
+              >
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </div>
   );
 };
