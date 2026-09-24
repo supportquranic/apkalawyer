@@ -299,7 +299,6 @@ export const FreeLegalToolsWizard: React.FC<FreeLegalToolsWizardProps> = ({
   const [selectedToolId, setSelectedToolId] = useState(initialToolId);
   const [step, setStep] = useState<'form' | 'preview' | 'send_direct'>('form');
 
-  // Form states
   const selectedTool = FREE_LEGAL_TOOLS.find((t) => t.id === selectedToolId) || FREE_LEGAL_TOOLS[0];
 
   const [partyA, setPartyA] = useState(selectedTool.defaultFields.partyA);
@@ -310,14 +309,29 @@ export const FreeLegalToolsWizard: React.FC<FreeLegalToolsWizardProps> = ({
   const [summary, setSummary] = useState(selectedTool.defaultFields.summary);
   const [noticeDays, setNoticeDays] = useState(selectedTool.defaultFields.noticeDays || '14');
 
-  // Generated text state
   const [generatedDraftText, setGeneratedDraftText] = useState('');
   const [copied, setCopied] = useState(false);
 
-  // Lawyer Direct Send State
   const [lawyersList, setLawyersList] = useState<Lawyer[]>([]);
   const [selectedLawyerId, setSelectedLawyerId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Sync tool selection when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const tool = FREE_LEGAL_TOOLS.find((t) => t.id === initialToolId) || FREE_LEGAL_TOOLS[0];
+      setSelectedToolId(tool.id);
+      setActiveCategory(tool.category);
+      setPartyA(tool.defaultFields.partyA);
+      setPartyB(tool.defaultFields.partyB);
+      setCity(tool.defaultFields.city);
+      setAmount(tool.defaultFields.amount || '0');
+      setReferenceNo(tool.defaultFields.referenceNo || '');
+      setSummary(tool.defaultFields.summary);
+      setNoticeDays(tool.defaultFields.noticeDays || '14');
+      setStep('form');
+    }
+  }, [isOpen, initialToolId, initialCategory]);
 
   if (!isOpen) return null;
 
