@@ -22,7 +22,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useLocation } from 'react-router-dom';
 import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
-import { LegalNoticeWizard } from '@/components/legalNotice/LegalNoticeWizard';
+import { FreeLegalToolsWizard } from '@/components/legalTools/FreeLegalToolsWizard';
 
 const CATEGORIES = [
   'All Matters',
@@ -734,12 +734,12 @@ export const ClientConsultationsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Legal Notice Generator Wizard Modal */}
-      <LegalNoticeWizard
+      {/* Free Legal Tools Generator Wizard Modal */}
+      <FreeLegalToolsWizard
         isOpen={isWizardOpen}
         onClose={() => setIsWizardOpen(false)}
         onSuccessPost={() => {
-          showToast('Legal notice draft posted to feed for Advocate review!');
+          showToast('Draft posted to feed for Advocate review!');
           loadThreads();
         }}
       />

@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import { MOCK_LEGAL_TEMPLATES } from '@/data/mock/legalDocuments.mock';
-import { LegalTemplate } from '@/types/legalDocument';
 import { useSEO } from '@/hooks/useSEO';
-import { FileSignature, Clock, ShieldAlert, Sparkles, Gavel, CheckCircle2 } from 'lucide-react';
-import { LegalNoticeWizard } from '@/components/legalNotice/LegalNoticeWizard';
+import { 
+  FileText, 
+  FileSignature, 
+  FileCheck2, 
+  Building2, 
+  Sparkles, 
+  ShieldCheck, 
+  Search, 
+  CheckCircle2, 
+  ArrowRight,
+  ShieldAlert,
+  Gavel
+} from 'lucide-react';
+import { FreeLegalToolsWizard, FREE_LEGAL_TOOLS, LegalToolCategory } from '@/components/legalTools/FreeLegalToolsWizard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/routes/paths';
 
 export const ClientLegalDocsPage: React.FC = () => {
-  useSEO({ title: 'Legal Notice & Document Drafter — ApkaLawyer', noIndex: true });
+  useSEO({ title: 'Free Legal Tools: Create. Understand. Prepare. — ApkaLawyer', noIndex: true });
   const navigate = useNavigate();
 
   const [isWizardOpen, setIsWizardOpen] = useState(false);
+  const [activeCategoryFilter, setActiveCategoryFilter] = useState<LegalToolCategory | 'all'>('all');
+  const [selectedToolId, setSelectedToolId] = useState('notice_cheque_489f');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -19,9 +31,18 @@ export const ClientLegalDocsPage: React.FC = () => {
     setTimeout(() => setToastMessage(null), 4000);
   };
 
+  const openToolWizard = (toolId: string, category: LegalToolCategory) => {
+    setSelectedToolId(toolId);
+    setIsWizardOpen(true);
+  };
+
+  const displayedTools = activeCategoryFilter === 'all'
+    ? FREE_LEGAL_TOOLS
+    : FREE_LEGAL_TOOLS.filter((t) => t.category === activeCategoryFilter);
+
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-12">
-      {/* Toast */}
+    <div className="space-y-6 max-w-7xl mx-auto pb-16">
+      {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-4 py-2.5 rounded-full text-xs font-semibold shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-300">
           <Sparkles className="h-4 w-4 text-white" />
@@ -29,83 +50,162 @@ export const ClientLegalDocsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Page Title & Launch Banner */}
-      <div className="bg-white border border-neutral-200 p-5 rounded-2xl shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-black tracking-tight">Legal Notice & Document Generator</h1>
-            <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded font-bold uppercase">
-              Pakistani Statutory Format
-            </span>
+      {/* Main Hero Header */}
+      <div className="bg-white border border-neutral-200 p-6 sm:p-8 rounded-3xl shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+                ApkaLawyer Tools
+              </span>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                100% FREE BASIC DRAFT
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight">
+              Free Legal Tools
+            </h1>
+            <p className="text-sm font-semibold text-neutral-600">
+              Create. Understand. Prepare.
+            </p>
+            <p className="text-xs text-neutral-500 max-w-xl leading-relaxed">
+              Generate structured statutory legal drafts for Pakistani High Courts & District Courts. Get your baseline draft free, then opt for High Court Advocate verification or court representation.
+            </p>
           </div>
-          <p className="text-xs text-neutral-500 mt-1">
-            Draft statutory legal notices for Cheque Dishonour (489-F), Property Eviction, Contract Recovery & Family disputes.
-          </p>
+
+          <button
+            type="button"
+            onClick={() => openToolWizard('notice_cheque_489f', 'notice')}
+            className="glass-btn gap-2 px-6 py-3 text-xs font-bold text-black whitespace-nowrap shadow-sm"
+          >
+            <Sparkles className="h-4 w-4 text-black" />
+            <span>Launch Legal Drafter</span>
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsWizardOpen(true)}
-          className="glass-btn gap-2 px-5 py-2.5 text-xs font-bold text-black whitespace-nowrap"
-        >
-          <Gavel className="h-4 w-4" />
-          <span>Launch Notice Drafter</span>
-        </button>
-      </div>
-
-      {/* Statutory Disclaimer */}
-      <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-neutral-800 flex items-start gap-3 text-xs">
-        <ShieldAlert className="h-5 w-5 text-black flex-shrink-0 mt-0.5" />
-        <div>
-          <strong>Preliminary Drafting Notice:</strong> Generated documents conform to Pakistan legal statutes. You can publish your draft to the public feed for Advocate verification or send it directly to a High Court Advocate via DM for signature.
+        {/* Funnel Pathway Indicator */}
+        <div className="pt-4 border-t border-neutral-100 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-[11px] font-semibold text-neutral-600">
+          <div className="p-2 bg-neutral-50 rounded-xl border border-neutral-200">
+            <span className="text-black font-bold">1. Free Tool</span>
+            <p className="text-[10px] text-neutral-400">Generate Basic Draft</p>
+          </div>
+          <div className="p-2 bg-neutral-50 rounded-xl border border-neutral-200">
+            <span className="text-black font-bold">2. User Gets Value</span>
+            <p className="text-[10px] text-neutral-400">Copy / Download Text</p>
+          </div>
+          <div className="p-2 bg-neutral-50 rounded-xl border border-neutral-200">
+            <span className="text-black font-bold">3. Advocate Review</span>
+            <p className="text-[10px] text-neutral-400">Optional Verification</p>
+          </div>
+          <div className="p-2 bg-neutral-50 rounded-xl border border-neutral-200">
+            <span className="text-black font-bold">4. Court Service</span>
+            <p className="text-[10px] text-neutral-400">Connect with Advocate</p>
+          </div>
         </div>
       </div>
 
-      {/* Templates Grid */}
+      {/* 4 Tool Category Tabs */}
+      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        {[
+          { id: 'all', label: 'All Tools', count: FREE_LEGAL_TOOLS.length },
+          { id: 'notice', label: 'Legal Notice', count: 4, icon: FileText },
+          { id: 'application', label: 'Application / Complaint', count: 3, icon: FileSignature },
+          { id: 'affidavit', label: 'Affidavit / Declaration', count: 3, icon: FileCheck2 },
+          { id: 'agreement', label: 'Agreement / Contract', count: 3, icon: Building2 },
+        ].map((tab) => {
+          const isActive = activeCategoryFilter === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveCategoryFilter(tab.id as any)}
+              className={cn(
+                'whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0',
+                isActive
+                  ? 'bg-black text-white shadow-xs'
+                  : 'bg-white text-neutral-700 border border-neutral-200 hover:border-neutral-300'
+              )}
+            >
+              <span>{tab.label}</span>
+              <span className={cn('text-[10px] px-1.5 py-0.2 rounded-full', isActive ? 'bg-neutral-800 text-white' : 'bg-neutral-100 text-neutral-500')}>
+                {tab.count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Tools Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {MOCK_LEGAL_TEMPLATES.map((tmpl: LegalTemplate) => (
-          <div key={tmpl.id} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs hover:border-neutral-300 transition-all space-y-4 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
+        {displayedTools.map((tool) => (
+          <div
+            key={tool.id}
+            className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs hover:border-neutral-300 transition-all space-y-4 flex flex-col justify-between"
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded-full bg-neutral-100 text-[10px] font-bold text-neutral-700 uppercase border border-neutral-200">
-                  {tmpl.category}
+                  {tool.categoryLabel}
                 </span>
-                <span className="text-[11px] text-neutral-400 flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  ~{tmpl.estimatedTimeMinutes} mins
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                  FREE DRAFT
                 </span>
               </div>
-              <h3 className="text-sm font-bold text-black">{tmpl.title}</h3>
-              <p className="text-xs text-neutral-600 mt-1 leading-relaxed">{tmpl.description}</p>
-              {tmpl.statutoryReference && (
-                <p className="text-[11px] font-mono text-black mt-2 font-semibold">
-                  Statute: {tmpl.statutoryReference}
+
+              <h3 className="text-sm font-bold text-black leading-snug">{tool.title}</h3>
+              <p className="text-xs text-neutral-600 leading-relaxed">{tool.description}</p>
+              
+              <div className="pt-1">
+                <p className="text-[11px] font-mono text-black font-semibold bg-neutral-50 p-2 rounded-xl border border-neutral-100 flex items-center gap-1.5">
+                  <Gavel className="h-3.5 w-3.5 text-black flex-shrink-0" />
+                  <span className="truncate">Statute: {tool.statute}</span>
                 </p>
-              )}
+              </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setIsWizardOpen(true)}
-              className="w-full glass-btn py-2.5 text-xs font-bold text-black gap-2 justify-center"
-            >
-              <FileSignature className="h-3.5 w-3.5 text-black" />
-              <span>Start Drafting Wizard</span>
-            </button>
+            <div className="space-y-2 pt-2 border-t border-neutral-100">
+              <button
+                type="button"
+                onClick={() => openToolWizard(tool.id, tool.category)}
+                className="w-full glass-btn py-2.5 text-xs font-bold text-black gap-2 justify-center"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-black" />
+                <span>Create Free Basic Draft</span>
+              </button>
+
+              <div className="flex items-center justify-between text-[11px] text-neutral-500 px-1 pt-0.5">
+                <span className="flex items-center gap-1">
+                  <ShieldCheck className="h-3 w-3 text-neutral-400" />
+                  <span>Optional Advocate Review</span>
+                </span>
+                <span className="text-neutral-400">•</span>
+                <button
+                  type="button"
+                  onClick={() => navigate(ROUTES.PUBLIC.LAWYERS)}
+                  className="text-black font-semibold hover:underline"
+                >
+                  Find a Lawyer →
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Wizard Modal */}
-      <LegalNoticeWizard
+      {/* Free Legal Tools Wizard Modal */}
+      <FreeLegalToolsWizard
         isOpen={isWizardOpen}
         onClose={() => setIsWizardOpen(false)}
+        initialToolId={selectedToolId}
+        initialCategory={
+          FREE_LEGAL_TOOLS.find((t) => t.id === selectedToolId)?.category || 'notice'
+        }
         onSuccessPost={() => {
-          showToast('Legal notice draft published to feed for Advocate review!');
+          showToast('Draft published to feed for Advocate review!');
           setTimeout(() => navigate(ROUTES.CLIENT.CONSULTATIONS), 1200);
         }}
         onSuccessSendDirect={(lawyerName) => {
-          showToast(`Legal notice draft sent directly to ${lawyerName} via DM!`);
+          showToast(`Draft sent directly to ${lawyerName} via DM for review!`);
           setTimeout(() => navigate(ROUTES.CLIENT.MESSAGES), 1200);
         }}
       />
