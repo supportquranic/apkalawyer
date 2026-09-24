@@ -67,7 +67,7 @@ export const initialMockThreads: LegalThread[] = [
     authorName: 'Farhan Ali Qureshi',
     authorAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
     authorCity: 'Karachi, Sindh',
-    category: 'Corporate & Contract Breach',
+    category: 'Corporate & Contracts',
     title: 'Software vendor pending PKR 2.4M payment after approved SLA milestone',
     content: 'Our IT consultancy signed a formal SLA with an offshore client subsidiary in Karachi. We delivered Phase 1 & 2 with sign-offs. Overdue for 75 days. What is the fastest legal recourse — Legal Notice under Contract Act or Order 37 CPC Summary Suit?',
     images: [

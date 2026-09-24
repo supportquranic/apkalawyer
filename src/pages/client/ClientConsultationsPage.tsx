@@ -30,7 +30,7 @@ const CATEGORIES = [
   'Family, Khula & Child Custody',
   'Criminal Defense & Bail',
   'Civil Litigation & Inheritance',
-  'Corporate & Contract Breach',
+  'Corporate & Contracts',
   'Banking & Cheque Bounce (489-F)',
   'Cybercrime & PECA (FIA)',
   'Labor & Employment',
@@ -404,24 +404,21 @@ export const ClientConsultationsPage: React.FC = () => {
                   className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-xs hover:border-neutral-300 transition-all space-y-3"
                 >
                   {/* Post Author Bar */}
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                       <img
                         src={thread.authorAvatar}
                         alt={thread.authorName}
-                        className="h-10 w-10 rounded-full object-cover border border-neutral-200"
+                        className="h-10 w-10 rounded-full object-cover border border-neutral-200 flex-shrink-0"
                       />
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs sm:text-sm font-bold text-black">
-                            {thread.authorName}
-                          </span>
-                          <ShieldCheck className="h-3.5 w-3.5 text-neutral-700" />
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[11px] text-neutral-400">
+                      <div className="min-w-0">
+                        <p className="text-xs sm:text-sm font-bold text-black truncate">
+                          {thread.authorName}
+                        </p>
+                        <div className="flex items-center gap-2 text-[11px] text-neutral-500 whitespace-nowrap mt-0.5">
                           <span>{thread.authorCity}</span>
-                          <span>•</span>
-                          <span className="flex items-center gap-0.5">
+                          <span className="text-neutral-300">•</span>
+                          <span className="flex items-center gap-1 text-neutral-400">
                             <Clock className="h-3 w-3" />
                             {thread.createdAt}
                           </span>
@@ -429,7 +426,7 @@ export const ClientConsultationsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-full border border-neutral-200">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-full border border-neutral-200 whitespace-nowrap flex-shrink-0">
                       {thread.category}
                     </span>
                   </div>
