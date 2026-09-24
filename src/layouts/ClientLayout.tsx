@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/routes/paths';
 import { 
@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 export const ClientLayout: React.FC = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
 
   // Full sidebar items for desktop
   const desktopNavItems = [
@@ -37,17 +38,43 @@ export const ClientLayout: React.FC = () => {
     { label: 'Profile', path: ROUTES.CLIENT.PROFILE, icon: User },
   ];
 
-  // 5-item mobile floating bottom navigation
+  // Mobile navigation items (Text only, no icons)
   const mobileBottomNavItems = [
-    { label: 'Home', path: ROUTES.CLIENT.DASHBOARD, icon: LayoutDashboard },
-    { label: 'Lawyers', path: ROUTES.CLIENT.LAWYERS, icon: Users },
-    { label: 'Consults', path: ROUTES.CLIENT.CONSULTATIONS, icon: Calendar },
-    { label: 'Matters', path: ROUTES.CLIENT.MATTERS, icon: Briefcase },
-    { label: 'Profile', path: ROUTES.CLIENT.PROFILE, icon: User },
+    { label: 'Home', path: ROUTES.CLIENT.DASHBOARD },
+    { label: 'Lawyers', path: ROUTES.CLIENT.LAWYERS },
+    { label: 'Consults', path: ROUTES.CLIENT.CONSULTATIONS },
+    { label: 'Matters', path: ROUTES.CLIENT.MATTERS },
+    { label: 'Profile', path: ROUTES.CLIENT.PROFILE },
   ];
+
+  const activeIndex = Math.max(
+    0,
+    mobileBottomNavItems.findIndex(
+      (item) =>
+        location.pathname === item.path ||
+        (item.path !== ROUTES.CLIENT.DASHBOARD && location.pathname.startsWith(item.path))
+    )
+  );
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (!navRef.current) return;
+    const rect = navRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    navRef.current.style.setProperty('--mx', `${x}%`);
+    navRef.current.style.setProperty('--my', `${y}%`);
+  };
 
   return (
     <div className="min-h-screen flex bg-[#F9FAFB] text-black">
+      {/* Liquid Glass Refraction Filter Definition */}
+      <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
+        <filter id="lens" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="4" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </svg>
+
       {/* Desktop Minimal Sidebar */}
       <aside className="w-60 bg-white text-neutral-800 flex flex-col border-r border-neutral-200 hidden md:flex">
         {/* Brand Header */}
@@ -153,27 +180,35 @@ export const ClientLayout: React.FC = () => {
         </main>
       </div>
 
-      {/* Mobile Floating Bottom Navigation Bar (Hyper-Realistic Frosted Glass Pill) */}
+      {/* Mobile Floating Bottom Navigation Bar (Ultra-Realistic Liquid Glass Toggle) */}
       <nav
+        ref={navRef}
+        onPointerMove={handlePointerMove}
         aria-label="Mobile Navigation"
-        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-pill-container rounded-full p-1.5 flex items-center justify-between z-50 md:hidden transition-all duration-300"
+        className="fixed bottom-4 inset-x-4 max-w-md mx-auto liquid-glass-nav p-1 flex items-center justify-between z-50 md:hidden"
       >
-        {mobileBottomNavItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = location.pathname === item.path || (item.path !== ROUTES.CLIENT.DASHBOARD && location.pathname.startsWith(item.path));
+        {/* Liquid Sliding Thumb */}
+        <div
+          className="liquid-nav-thumb pointer-events-none"
+          style={{
+            left: `calc(${activeIndex} * (100% / ${mobileBottomNavItems.length}) + 4px)`,
+            width: `calc((100% / ${mobileBottomNavItems.length}) - 8px)`,
+          }}
+        />
+
+        {mobileBottomNavItems.map((item, idx) => {
+          const isActive = activeIndex === idx;
           return (
             <Link
               key={item.path}
               to={item.path}
               className={cn(
-                'flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full text-[10px] transition-all duration-200',
-                isActive 
-                  ? 'glass-pill-active font-semibold' 
-                  : 'glass-pill-inactive font-normal'
+                'flex-1 py-2 px-1 text-center font-sans tracking-tight transition-all duration-300 relative z-10',
+                'liquid-nav-label',
+                isActive ? 'active' : ''
               )}
             >
-              <Icon className={cn('h-4 w-4 mb-0.5', isActive ? 'text-white' : 'text-white/65')} />
-              <span className="leading-tight">{item.label}</span>
+              <span className="inline-block text-[12px]">{item.label}</span>
             </Link>
           );
         })}
