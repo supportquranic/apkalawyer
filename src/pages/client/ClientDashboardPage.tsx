@@ -68,7 +68,7 @@ export const ClientDashboardPage: React.FC = () => {
 
           {/* Bottom Action Pill */}
           <div className="relative z-10 pt-2">
-            <span className="inline-flex items-center gap-1 sm:gap-1.5 bg-black text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm group-hover:bg-neutral-800 transition-colors">
+            <span className="glass-btn gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2">
               <span>Book Now</span>
               <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
@@ -104,9 +104,9 @@ export const ClientDashboardPage: React.FC = () => {
 
             {/* Action */}
             <div className="relative z-10 pt-2">
-              <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-black group-hover:translate-x-1 transition-transform">
+              <span className="glass-btn gap-1 text-[10px] sm:text-xs font-bold px-3 sm:px-3.5 py-1 sm:py-1.5">
                 <span>Start Call</span>
-                <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                <ArrowRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>
           </Link>
@@ -138,7 +138,7 @@ export const ClientDashboardPage: React.FC = () => {
 
             {/* Action */}
             <div className="relative z-10 pt-2">
-              <span className="inline-flex items-center gap-1 bg-black text-white text-[10px] sm:text-xs font-bold px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full group-hover:bg-neutral-800 transition-colors shadow-xs">
+              <span className="glass-btn gap-1 text-[10px] sm:text-xs font-bold px-3 sm:px-3.5 py-1 sm:py-1.5">
                 <span>Explore</span>
                 <ArrowRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 group-hover:translate-x-0.5 transition-transform" />
               </span>
