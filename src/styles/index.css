@@ -169,43 +169,34 @@
   font-weight: 600;
 }
 
-/* Highly Transparent Liquid Glass Action Pill / Button */
+/* Crisp Stroke-Shaped Action Pill / Button */
 .glass-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  border: 0;
+  border-radius: 9999px;
+  border: 1px solid #D1D5DB; /* Crisp 1px stroke border (neutral-300) */
   outline: none;
-  background:
-    radial-gradient(80% 55% at 50% 118%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.12) 70%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.04) 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.35),
-    0 2px 6px -1px rgba(0, 0, 0, 0.08),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 2px 0 rgba(255, 255, 255, 0.2),
-    inset 4px 0 8px -3px rgba(0, 0, 0, 0.04),
-    inset -4px 0 8px -3px rgba(0, 0, 0, 0.04);
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
   color: #000000;
   font-weight: 600;
-  transition: all 0.25s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .glass-btn:hover {
-  background:
-    radial-gradient(80% 55% at 50% 118%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 70%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.03) 100%);
+  border-color: #000000;
+  background-color: #F9FAFB;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
 
 .glass-btn:active {
   transform: scale(0.97);
+  background-color: #F3F4F6;
 }
 
 /* Hide scrollbar utility */
