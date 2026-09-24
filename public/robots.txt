@@ -1,0 +1,22 @@
+# ApkaLawyer Robots.txt
+# Public pages are indexable; private application dashboards are disallowed.
+
+User-agent: *
+Allow: /
+Allow: /lawyers
+Allow: /practice-areas
+Allow: /how-it-works
+Allow: /about
+Allow: /faq
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+
+# Disallow private user dashboards and API routes from crawling
+Disallow: /client/
+Disallow: /lawyer/
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://apkalawyer.pk/sitemap.xml

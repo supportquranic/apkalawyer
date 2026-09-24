@@ -1,0 +1,48 @@
+import { LegalTemplate } from '@/types/legalDocument';
+
+export const MOCK_LEGAL_TEMPLATES: LegalTemplate[] = [
+  {
+    id: 'tmpl-01',
+    type: 'legal_notice_defamation',
+    title: 'Legal Notice: Defamation (Libel / Slander)',
+    category: 'Notices',
+    description: 'Statutory 14-day pre-action notice issued under Defamation Ordinance 2002 for reputational damages and unconditional apology.',
+    statutoryReference: 'Defamation Ordinance 2002 (Pakistan)',
+    fieldsCount: 8,
+    estimatedTimeMinutes: 5,
+    popular: true,
+  },
+  {
+    id: 'tmpl-02',
+    type: 'legal_notice_cheque_dishonour',
+    title: 'Legal Notice: Cheque Dishonour (Section 489-F)',
+    category: 'Notices',
+    description: 'Mandatory demand notice for dishonoured cheque payment prior to lodging FIR under Section 489-F Pakistan Penal Code.',
+    statutoryReference: 'Section 489-F PPC & Negotiable Instruments Act 1881',
+    fieldsCount: 7,
+    estimatedTimeMinutes: 4,
+    popular: true,
+  },
+  {
+    id: 'tmpl-03',
+    type: 'nda_bilateral',
+    title: 'Mutual Non-Disclosure Agreement (NDA)',
+    category: 'Agreements',
+    description: 'Enforceable bilateral confidentiality agreement governed by the laws of Pakistan with dispute jurisdiction clauses.',
+    statutoryReference: 'Contract Act 1872',
+    fieldsCount: 6,
+    estimatedTimeMinutes: 4,
+    popular: true,
+  },
+  {
+    id: 'tmpl-04',
+    type: 'tenancy_residential',
+    title: 'Residential Tenancy Agreement (Punjab / ICT / Sindh)',
+    category: 'Property',
+    description: 'Comprehensive lease agreement conforming to Punjab Rented Premises Act 2009 / Islamabad Rent Restriction Ordinance.',
+    statutoryReference: 'Punjab Rented Premises Act 2009',
+    fieldsCount: 11,
+    estimatedTimeMinutes: 7,
+    popular: false,
+  },
+];
