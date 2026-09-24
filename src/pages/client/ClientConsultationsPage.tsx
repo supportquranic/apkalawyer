@@ -15,14 +15,11 @@ import {
   ShieldCheck, 
   Search, 
   Gavel, 
-  MessageCircle,
   Clock,
-  Sparkles,
-  Inbox
+  Sparkles
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Link, useLocation } from 'react-router-dom';
-import { ROUTES } from '@/routes/paths';
+import { useLocation } from 'react-router-dom';
 
 const CATEGORIES = [
   'All Matters',
@@ -41,7 +38,6 @@ export const ClientConsultationsPage: React.FC = () => {
 
   const locationState = useLocation();
 
-  const [activeTab, setActiveTab] = useState<'feed' | 'my_offers'>('feed');
   const [threads, setThreads] = useState<LegalThread[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All Matters');
@@ -186,9 +182,7 @@ export const ClientConsultationsPage: React.FC = () => {
     loadThreads();
   };
 
-  // Total private offers across user's threads
-  const myThreads = threads.filter((t) => t.authorId === 'usr-client-01' || t.authorId === 'usr-current' || threads.indexOf(t) === 0);
-  const totalOffersCount = myThreads.reduce((acc, t) => acc + (t.offers?.length || 0), 0);
+
 
   if (isLoading) return <LoadingState message="Loading legal consultations feed..." />;
 
@@ -202,72 +196,7 @@ export const ClientConsultationsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Header Banner */}
-      <div className="bg-white p-4 sm:p-5 rounded-2xl border border-neutral-200 shadow-xs space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg sm:text-xl font-bold text-black tracking-tight">
-                Legal Consultations
-              </h1>
-              <span className="text-[10px] font-bold uppercase tracking-wider bg-black text-white px-2 py-0.5 rounded-full">
-                Threads
-              </span>
-            </div>
-            <p className="text-xs text-neutral-500 mt-0.5">
-              Community consultation threads, advocate advices, and private representation offers.
-            </p>
-          </div>
 
-          <button
-            type="button"
-            onClick={() => setIsComposerOpen(!isComposerOpen)}
-            className="glass-btn gap-1.5 px-4 py-2 text-xs font-bold text-black self-start sm:self-auto"
-          >
-            <MessageSquare className="h-3.5 w-3.5" />
-            <span>{isComposerOpen ? 'Close Composer' : 'Post Thread'}</span>
-          </button>
-        </div>
-
-        {/* View Switcher: Public Feed vs Private Offers & Messages */}
-        <div className="flex items-center gap-2 pt-1 border-t border-neutral-100">
-          <button
-            type="button"
-            onClick={() => setActiveTab('feed')}
-            className={cn(
-              'flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5',
-              activeTab === 'feed'
-                ? 'bg-black text-white shadow-xs'
-                : 'bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200/60'
-            )}
-          >
-            <MessageSquare className="h-3.5 w-3.5" />
-            <span>Consultation Feed</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('my_offers')}
-            className={cn(
-              'flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 relative',
-              activeTab === 'my_offers'
-                ? 'bg-black text-white shadow-xs'
-                : 'bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200/60'
-            )}
-          >
-            <Inbox className="h-3.5 w-3.5" />
-            <span>My Posts & Private Offers</span>
-            {totalOffersCount > 0 && (
-              <span className={cn(
-                'text-[10px] px-1.5 py-0.2 rounded-full font-bold',
-                activeTab === 'my_offers' ? 'bg-white text-black' : 'bg-black text-white'
-              )}>
-                {totalOffersCount}
-              </span>
-            )}
-          </button>
-        </div>
-      </div>
 
       {/* Thread Composer Modal / Card */}
       {isComposerOpen && (
@@ -380,9 +309,9 @@ export const ClientConsultationsPage: React.FC = () => {
       )}
 
       {/* =========================================================================
-          TAB 1: PUBLIC CONSULTATIONS FEED
+          CONSULTATIONS FEED
          ========================================================================= */}
-      {activeTab === 'feed' && (
+      {!isLoading && (
         <div className="space-y-4">
           {/* Filter & Search Bar */}
           <div className="space-y-2.5">
@@ -640,125 +569,6 @@ export const ClientConsultationsPage: React.FC = () => {
         </div>
       )}
 
-      {/* =========================================================================
-          TAB 2: MY POSTS & PRIVATE REPRESENTATION OFFERS (Confidential to Poster)
-         ========================================================================= */}
-      {activeTab === 'my_offers' && (
-        <div className="space-y-4">
-          <div className="bg-neutral-50 p-3.5 rounded-2xl border border-neutral-200 text-xs text-neutral-600 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-black flex-shrink-0" />
-              <span>
-                <strong>Confidential Section:</strong> Representation offers and direct fee quotes sent by advocates are only visible here to you.
-              </span>
-            </div>
-            <Link
-              to={ROUTES.CLIENT.MESSAGES}
-              className="glass-btn px-3 py-1 text-xs font-bold text-black flex-shrink-0"
-            >
-              Open Messages
-            </Link>
-          </div>
-
-          {myThreads.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-neutral-200 p-8 text-center space-y-2">
-              <Inbox className="h-8 w-8 text-neutral-300 mx-auto" />
-              <h3 className="text-sm font-bold text-black">No Active Posts Yet</h3>
-              <p className="text-xs text-neutral-500 max-w-sm mx-auto">
-                Post your legal question or dispute to receive expert advices and representation offers from advocates.
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveTab('feed');
-                  setIsComposerOpen(true);
-                }}
-                className="glass-btn px-4 py-1.5 text-xs font-bold text-black mt-2"
-              >
-                Create Your First Post
-              </button>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {myThreads.map((thread) => (
-                <div
-                  key={thread.id}
-                  className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-xs space-y-3.5"
-                >
-                  <div className="flex items-start justify-between gap-2 border-b border-neutral-100 pb-3">
-                    <div>
-                      <span className="text-[10px] font-bold uppercase text-neutral-400 block mb-0.5">
-                        {thread.category} • Posted {thread.createdAt}
-                      </span>
-                      <h3 dir="auto" className="text-sm sm:text-base font-bold text-black">{thread.title}</h3>
-                    </div>
-                    <span className="text-[10px] font-bold bg-neutral-100 text-black px-2.5 py-1 rounded-full border border-neutral-200 flex-shrink-0">
-                      {thread.offers?.length || 0} Offers Received
-                    </span>
-                  </div>
-
-                  {/* List of Private Offers for this specific thread */}
-                  {thread.offers && thread.offers.length > 0 ? (
-                    <div className="space-y-2.5">
-                      <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-wider">
-                        Advocate Proposals & Quotes:
-                      </p>
-                      {thread.offers.map((offer) => (
-                        <div
-                          key={offer.id}
-                          className="bg-neutral-50 p-3.5 rounded-xl border border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                        >
-                          <div className="flex items-start gap-3">
-                            <img
-                              src={offer.lawyerAvatar}
-                              alt={offer.lawyerName}
-                              className="h-10 w-10 rounded-full object-cover border border-neutral-200 flex-shrink-0"
-                            />
-                            <div className="space-y-0.5">
-                              <div className="flex items-center gap-1.5">
-                                <p className="text-xs font-bold text-black">{offer.lawyerName}</p>
-                                <CheckCircle2 className="h-3 w-3 text-black" />
-                              </div>
-                              <p className="text-[11px] text-neutral-500">
-                                {offer.lawyerTitle} • {offer.experienceYears} Yrs Exp • {offer.city}
-                              </p>
-                              <p dir="auto" className="text-xs text-neutral-800 italic pt-1">
-                                "{offer.message}"
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 flex-shrink-0 self-end sm:self-center">
-                            {offer.feeQuotePKR && (
-                              <div className="text-right">
-                                <span className="text-[10px] text-neutral-400 block">Estimated Fee</span>
-                                <span className="text-xs font-bold text-black">
-                                  PKR {offer.feeQuotePKR.toLocaleString()}
-                                </span>
-                              </div>
-                            )}
-                            <Link
-                              to={ROUTES.CLIENT.MESSAGES}
-                              className="glass-btn px-3.5 py-1.5 text-xs font-bold text-black flex items-center gap-1"
-                            >
-                              <MessageCircle className="h-3.5 w-3.5" />
-                              <span>Message</span>
-                            </Link>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-xs text-neutral-400 italic py-2">
-                      No representation offers submitted yet for this post.
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* "Offer" Representation Modal (Advocate to Post Author) */}
       {activeOfferThread && (
