@@ -175,5 +175,77 @@ export const threadService = {
     });
     setStoredThreads(updated);
     return target;
+  },
+
+  async createLegalNoticeThread(data: {
+    authorName: string;
+    authorAvatar?: string;
+    authorCity: string;
+    category: string;
+    title: string;
+    content: string;
+    noticeDetails: {
+      noticeType: string;
+      senderName: string;
+      recipientName: string;
+      demandAmount?: string;
+      noticePeriodDays?: number;
+      rawDraftText: string;
+    };
+  }): Promise<LegalThread> {
+    await new Promise((r) => setTimeout(r, 150));
+    const threads = getStoredThreads();
+    const newThread: LegalThread = {
+      id: `notice-${Date.now()}`,
+      authorId: 'usr-current',
+      authorName: data.authorName || 'Client Citizen',
+      authorAvatar: data.authorAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
+      authorCity: data.authorCity || 'Pakistan',
+      category: data.category || 'Legal Notice Verification',
+      title: data.title,
+      content: data.content,
+      isLegalNoticeDraft: true,
+      noticeDetails: data.noticeDetails,
+      approvalStatus: 'pending',
+      createdAt: 'Just now',
+      helpfulCount: 0,
+      status: 'under_review',
+      advices: [],
+      offers: []
+    };
+
+    const updated = [newThread, ...threads];
+    setStoredThreads(updated);
+    return newThread;
+  },
+
+  async approveLegalNotice(
+    threadId: string,
+    lawyerName: string,
+    lawyerTitle: string,
+    note?: string
+  ): Promise<LegalThread | null> {
+    await new Promise((r) => setTimeout(r, 150));
+    const threads = getStoredThreads();
+    let updatedThread: LegalThread | null = null;
+
+    const updated = threads.map((t) => {
+      if (t.id === threadId) {
+        updatedThread = {
+          ...t,
+          approvalStatus: 'approved',
+          approvedByLawyerName: lawyerName,
+          approvedByLawyerTitle: lawyerTitle,
+          approvedAt: 'Just now',
+          approvalNote: note || 'Draft reviewed and verified for statutory compliance.',
+          status: 'resolved'
+        };
+        return updatedThread;
+      }
+      return t;
+    });
+
+    setStoredThreads(updated);
+    return updatedThread;
   }
 };

@@ -13,6 +13,7 @@ import {
   ArrowLeft,
   MessageSquare,
   Sparkles,
+  FileText,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -26,6 +27,18 @@ function parseOfferCard(content: string) {
     fee: Number(parts[3]) || 0,
     message: parts[4] || '',
     caseTitle: parts[5] || '',
+  };
+}
+
+/* ─── helper: parse legal notice draft content string ─── */
+function parseNoticeDraft(content: string) {
+  const parts = content.replace('__NOTICE_DRAFT__|', '').split('|');
+  return {
+    noticeType: parts[0] || 'Legal Notice',
+    senderName: parts[1] || '',
+    recipientName: parts[2] || '',
+    demandAmount: parts[3] ? `PKR ${Number(parts[3]).toLocaleString()}` : '',
+    rawDraftText: parts[4] || ''
   };
 }
 
@@ -264,6 +277,73 @@ export const ClientMessagesPage: React.FC = () => {
                 {messages.map((m) => {
                   const isMe = m.senderId === user?.id;
                   const isOfferCard = m.content.startsWith('__OFFER_CARD__|');
+                  const isNoticeDraftCard = m.content.startsWith('__NOTICE_DRAFT__|');
+
+                  // ── Render Legal Notice Review Request Card ──
+                  if (isNoticeDraftCard) {
+                    const draft = parseNoticeDraft(m.content);
+                    return (
+                      <div key={m.id} className="flex justify-start">
+                        <div className="max-w-md w-full">
+                          <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden">
+                            <div className="bg-neutral-900 px-4 py-3 flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <FileText className="h-4 w-4 text-white" />
+                                <span className="text-xs font-bold text-white">Legal Notice Draft Review Request</span>
+                              </div>
+                              <span className="text-[10px] font-bold text-white/70">{formatTime(m.timestamp)}</span>
+                            </div>
+
+                            <div className="p-4 space-y-3">
+                              <div className="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-xs text-amber-900 space-y-0.5">
+                                <p className="font-bold">{draft.noticeType}</p>
+                                <p className="text-[11px] text-amber-800">Sender: {draft.senderName} • Recipient: {draft.recipientName}</p>
+                                {draft.demandAmount && <p className="text-[11px] font-semibold text-amber-900">Claim Amount: {draft.demandAmount}</p>}
+                              </div>
+
+                              {/* Draft snippet */}
+                              <div className="bg-neutral-900 text-neutral-100 font-mono text-[10px] p-3 rounded-xl max-h-40 overflow-y-auto whitespace-pre-wrap">
+                                {draft.rawDraftText}
+                              </div>
+
+                              {/* Lawyer Action */}
+                              <div className="flex items-center gap-2 pt-1">
+                                <button
+                                  type="button"
+                                  onClick={async () => {
+                                    const approvedMsg = await messageService.sendMessage(
+                                      activeConv.id,
+                                      'law-zeeshan',
+                                      activeConv.lawyerName,
+                                      'lawyer',
+                                      `✓ I have reviewed your Legal Notice draft for ${draft.noticeType} against ${draft.recipientName}. The draft is fully compliant with Pakistan statutory requirements and approved for service.`
+                                    );
+                                    setMessages((prev) => [...prev, approvedMsg]);
+                                    showToast('Legal notice draft approved! Confirmation sent in chat.');
+                                  }}
+                                  className="flex-1 glass-btn px-3 py-2 text-xs font-bold text-emerald-900 bg-emerald-50 border-emerald-300 hover:bg-emerald-100 gap-1.5 justify-center"
+                                >
+                                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                                  Approve Notice
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const input = document.querySelector<HTMLInputElement>('#chat-input');
+                                    if (input) { input.focus(); }
+                                  }}
+                                  className="flex-1 px-3 py-2 text-xs font-bold text-neutral-600 bg-neutral-100 hover:bg-neutral-200 rounded-xl transition-colors flex items-center gap-1.5 justify-center"
+                                >
+                                  <Send className="h-3.5 w-3.5" />
+                                  Reply / Edit
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
 
                   // ── Render Offer Proposal Card ──
                   if (isOfferCard) {

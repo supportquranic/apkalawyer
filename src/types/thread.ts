@@ -44,4 +44,20 @@ export interface LegalThread {
   advices: LegalAdvice[];
   offers: RepresentationOffer[];
   status: 'open' | 'under_review' | 'resolved';
+
+  // Legal Notice Draft Review & Approval extensions
+  isLegalNoticeDraft?: boolean;
+  noticeDetails?: {
+    noticeType: string;
+    senderName: string;
+    recipientName: string;
+    demandAmount?: string;
+    noticePeriodDays?: number;
+    rawDraftText: string;
+  };
+  approvalStatus?: 'pending' | 'approved';
+  approvedByLawyerName?: string;
+  approvedByLawyerTitle?: string;
+  approvedAt?: string;
+  approvalNote?: string;
 }

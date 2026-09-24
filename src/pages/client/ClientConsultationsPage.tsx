@@ -16,11 +16,13 @@ import {
   Search, 
   Gavel, 
   Clock,
-  Sparkles
+  Sparkles,
+  FileText
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocation } from 'react-router-dom';
 import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
+import { LegalNoticeWizard } from '@/components/legalNotice/LegalNoticeWizard';
 
 const CATEGORIES = [
   'All Matters',
@@ -69,8 +71,9 @@ export const ClientConsultationsPage: React.FC = () => {
   const [offerFee, setOfferFee] = useState<string>('35000');
   const [offerMessage, setOfferMessage] = useState<string>('');
   
-  // Image Lightbox Modal
+  // Image Lightbox & Wizard Modals
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -190,6 +193,17 @@ export const ClientConsultationsPage: React.FC = () => {
     setActiveOfferThread(null);
     setOfferMessage('');
     showToast('Representation proposal sent privately to the client!');
+    loadThreads();
+  };
+
+  const handleApproveNotice = async (threadId: string) => {
+    await threadService.approveLegalNotice(
+      threadId,
+      user?.name || 'Advocate Muhammad Zeeshan',
+      'Advocate High Court',
+      'Draft reviewed and verified for Pakistan statutory compliance.'
+    );
+    showToast('Legal notice draft approved! Author notified & post archived.');
     loadThreads();
   };
 
@@ -332,15 +346,26 @@ export const ClientConsultationsPage: React.FC = () => {
         <div className="space-y-4">
           {/* Filter & Search Bar */}
           <div className="space-y-2.5">
-            <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
-              <input
-                type="text"
-                placeholder="Search consultation threads, topics, questions or advocate names..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-neutral-200 rounded-xl pl-9 pr-4 py-2 text-xs text-black placeholder:text-neutral-400 outline-none focus:border-black transition-colors"
-              />
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                <input
+                  type="text"
+                  placeholder="Search consultation threads, legal notices, or advocate names..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white border border-neutral-200 rounded-xl pl-9 pr-4 py-2 text-xs text-black placeholder:text-neutral-400 outline-none focus:border-black transition-colors"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsWizardOpen(true)}
+                className="glass-btn gap-1.5 px-3.5 py-2 text-xs font-bold text-black flex-shrink-0"
+              >
+                <Gavel className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Draft Legal Notice</span>
+              </button>
             </div>
 
             {/* Categories auto-scroll pill bar */}
@@ -419,6 +444,24 @@ export const ClientConsultationsPage: React.FC = () => {
                     </p>
                   </div>
 
+                  {/* Notice Draft Badge if applicable */}
+                  {thread.isLegalNoticeDraft && (
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+                          <FileText className="h-4 w-4 text-amber-600" />
+                          <span>Draft Legal Notice for Advocate Review</span>
+                        </span>
+                        <span className="text-[10px] font-bold bg-amber-200/70 text-amber-900 px-2 py-0.5 rounded-full uppercase">
+                          Pending Approval
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-amber-800">
+                        Notice Type: <strong>{thread.noticeDetails?.noticeType || thread.category}</strong> • Demand: <strong>{thread.noticeDetails?.demandAmount || 'N/A'}</strong>
+                      </p>
+                    </div>
+                  )}
+
                   {/* Attached Images (Strict Max 2 per post) */}
                   {thread.images && thread.images.length > 0 && (
                     <div
@@ -481,15 +524,28 @@ export const ClientConsultationsPage: React.FC = () => {
                       </button>
                     </div>
 
-                    {/* Offer Representation Button */}
-                    <button
-                      type="button"
-                      onClick={() => setActiveOfferThread(thread)}
-                      className="glass-btn gap-1 px-3.5 py-1.5 text-xs font-bold text-black"
-                    >
-                      <Briefcase className="h-3 w-3" />
-                      <span>Offer</span>
-                    </button>
+                    {/* Offer Representation & Approve Notice Buttons */}
+                    <div className="flex items-center gap-2">
+                      {thread.isLegalNoticeDraft && thread.approvalStatus !== 'approved' && (
+                        <button
+                          type="button"
+                          onClick={() => handleApproveNotice(thread.id)}
+                          className="glass-btn gap-1 px-3.5 py-1.5 text-xs font-bold text-emerald-900 bg-emerald-50 border-emerald-300 hover:bg-emerald-100"
+                        >
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                          <span>Approve Draft</span>
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => setActiveOfferThread(thread)}
+                        className="glass-btn gap-1 px-3.5 py-1.5 text-xs font-bold text-black"
+                      >
+                        <Briefcase className="h-3 w-3" />
+                        <span>Offer</span>
+                      </button>
+                    </div>
                   </div>
 
                   {/* Expanded Advices Section (Visible only after clicking Advices button) */}
@@ -684,6 +740,16 @@ export const ClientConsultationsPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Legal Notice Generator Wizard Modal */}
+      <LegalNoticeWizard
+        isOpen={isWizardOpen}
+        onClose={() => setIsWizardOpen(false)}
+        onSuccessPost={() => {
+          showToast('Legal notice draft posted to feed for Advocate review!');
+          loadThreads();
+        }}
+      />
     </div>
   );
 };
