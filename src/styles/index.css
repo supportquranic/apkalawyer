@@ -44,3 +44,16 @@
     background: #a3a3a3;
   }
 }
+
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float-subtle {
+  animation: floatSubtle 3s ease-in-out infinite;
+}

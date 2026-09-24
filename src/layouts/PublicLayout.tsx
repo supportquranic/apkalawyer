@@ -285,15 +285,6 @@ export const PublicLayout: React.FC = () => {
 
           {/* Desktop Right CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setInstallModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-100 hover:text-black transition-colors"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>Install App</span>
-            </button>
-
             {user ? (
               <Link
                 to={
@@ -570,6 +561,19 @@ export const PublicLayout: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Floating Bottom-Right Install App Button with minimal float animation */}
+      <button
+        type="button"
+        onClick={() => setInstallModalOpen(true)}
+        aria-label="Install ApkaLawyer App"
+        className="fixed bottom-6 right-5 sm:right-8 z-40 group flex items-center gap-2 bg-black text-white px-3.5 py-2.5 rounded-full shadow-2xl border border-neutral-800 hover:bg-neutral-900 transition-all duration-300 hover:scale-105 active:scale-95 animate-float-subtle cursor-pointer"
+      >
+        <div className="h-5 w-5 rounded-full bg-white text-black flex items-center justify-center flex-shrink-0">
+          <Download className="h-3 w-3" />
+        </div>
+        <span className="text-xs font-bold tracking-tight pr-1">Install App</span>
+      </button>
 
       {/* PWA Install Modal */}
       <InstallAppModal

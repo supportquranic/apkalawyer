@@ -13,9 +13,15 @@ if (rootElement) {
   );
 }
 
-// Register PWA Service Worker
+// Register PWA Service Worker with auto-update check
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
+        // Check for updates on every page load
+        registration.update().catch(() => {});
+      })
+      .catch(() => {});
   });
 }

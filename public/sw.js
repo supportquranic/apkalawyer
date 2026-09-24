@@ -1,4 +1,4 @@
-const CACHE_NAME = 'apkalawyer-v1';
+const CACHE_NAME = 'apkalawyer-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -6,7 +6,10 @@ const ASSETS_TO_CACHE = [
   '/favicon.svg',
   '/apple-touch-icon.png',
   '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/icons/icon-512.png',
+  '/icons/app-lawyer-booking.webp',
+  '/icons/app-video-consultation.webp',
+  '/icons/app-track-case.webp'
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,12 +37,22 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Navigation fallback to index.html for SPA routing offline
+  // Navigation fallback to network first, then index.html
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('/index.html') || caches.match('/');
-      })
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match('/index.html') || caches.match('/');
+        })
     );
     return;
   }
