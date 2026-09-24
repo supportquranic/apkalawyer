@@ -83,7 +83,7 @@ export const ClientMessagesPage: React.FC = () => {
   const regularConvs = conversations.filter((c) => !c.id.startsWith('conv-offer'));
 
   return (
-    <div className="max-w-7xl mx-auto h-[calc(100vh-8rem)] flex flex-col relative">
+    <div className="max-w-6xl mx-auto h-[calc(100vh-8.5rem)] flex flex-col relative">
       {/* Toast */}
       {toastMessage && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-4 py-2.5 rounded-full text-xs font-semibold shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-300">
@@ -92,18 +92,18 @@ export const ClientMessagesPage: React.FC = () => {
         </div>
       )}
 
-      <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-[320px_1fr] rounded-2xl border border-neutral-200 bg-white shadow-sm overflow-hidden">
+      <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-[320px_1fr] lg:grid-cols-[360px_1fr] bg-transparent overflow-hidden">
         {/* ═══════════════════════════════════════════════
             LEFT PANEL — CONVERSATION LIST
            ═══════════════════════════════════════════════ */}
         <div
           className={cn(
-            'border-r border-neutral-200 flex flex-col bg-white',
+            'flex flex-col md:border-r md:border-neutral-200 overflow-hidden',
             activeConv ? 'hidden md:flex' : 'flex'
           )}
         >
           {/* Header */}
-          <div className="px-4 py-3.5 border-b border-neutral-100">
+          <div className="pb-3 border-b border-neutral-200">
             <h1 className="text-base font-bold text-black tracking-tight flex items-center gap-2">
               <MessageSquare className="h-4 w-4 text-black" />
               Messages & Offers
@@ -113,48 +113,46 @@ export const ClientMessagesPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Scrollable List */}
-          <div className="flex-1 overflow-y-auto">
+          {/* Scrollable List with Divider Lines */}
+          <div className="flex-1 overflow-y-auto divide-y divide-neutral-200/80">
             {/* Offer Conversations Section */}
             {offerConvs.length > 0 && (
-              <div className="px-3 pt-3">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 px-1 mb-2 flex items-center gap-1.5">
+              <div>
+                <div className="py-2.5 px-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                   <Briefcase className="h-3 w-3" />
-                  Representation Offers ({offerConvs.length})
-                </p>
-                <div className="space-y-1">
+                  <span>Representation Offers ({offerConvs.length})</span>
+                </div>
+                <div className="divide-y divide-neutral-200/70 border-t border-b border-neutral-200/70">
                   {offerConvs.map((conv) => (
                     <button
                       key={conv.id}
                       type="button"
                       onClick={() => openConversation(conv)}
                       className={cn(
-                        'w-full text-left p-3 rounded-xl transition-all',
+                        'w-full text-left px-2 py-3 transition-colors flex items-center gap-3',
                         activeConv?.id === conv.id
-                          ? 'bg-neutral-100 border border-neutral-200'
-                          : 'hover:bg-neutral-50'
+                          ? 'bg-neutral-200/60 font-semibold'
+                          : 'hover:bg-neutral-100/70'
                       )}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative flex-shrink-0">
-                          <img
-                            src={conv.lawyerAvatar}
-                            alt={conv.lawyerName}
-                            className="h-9 w-9 rounded-full object-cover border border-neutral-200"
-                          />
-                          {conv.unreadCount > 0 && (
-                            <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-black ring-2 ring-white" />
-                          )}
+                      <div className="relative flex-shrink-0">
+                        <img
+                          src={conv.lawyerAvatar}
+                          alt={conv.lawyerName}
+                          className="h-10 w-10 rounded-full object-cover border border-neutral-200"
+                        />
+                        {conv.unreadCount > 0 && (
+                          <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-black ring-2 ring-white" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="text-xs font-bold text-black truncate">{conv.lawyerName}</span>
+                          <span className="text-[10px] text-neutral-400 flex-shrink-0 ml-2">
+                            {formatTime(conv.lastMessageTimestamp)}
+                          </span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-xs font-bold text-black truncate">{conv.lawyerName}</span>
-                            <span className="text-[9px] text-neutral-400 flex-shrink-0 ml-2">
-                              {formatTime(conv.lastMessageTimestamp)}
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-neutral-500 truncate">{conv.matterTitle?.replace('💼 ', '')}</p>
-                        </div>
+                        <p className="text-[11px] text-neutral-500 truncate">{conv.matterTitle?.replace('💼 ', '')}</p>
                       </div>
                     </button>
                   ))}
@@ -162,46 +160,44 @@ export const ClientMessagesPage: React.FC = () => {
               </div>
             )}
 
-            {/* Regular Conversations */}
+            {/* Regular Conversations Section */}
             {regularConvs.length > 0 && (
-              <div className="px-3 pt-3">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 px-1 mb-2 flex items-center gap-1.5">
+              <div className="pt-2">
+                <div className="py-2.5 px-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                   <MessageSquare className="h-3 w-3" />
-                  Direct Messages ({regularConvs.length})
-                </p>
-                <div className="space-y-1">
+                  <span>Direct Messages ({regularConvs.length})</span>
+                </div>
+                <div className="divide-y divide-neutral-200/70 border-t border-b border-neutral-200/70">
                   {regularConvs.map((conv) => (
                     <button
                       key={conv.id}
                       type="button"
                       onClick={() => openConversation(conv)}
                       className={cn(
-                        'w-full text-left p-3 rounded-xl transition-all',
+                        'w-full text-left px-2 py-3 transition-colors flex items-center gap-3',
                         activeConv?.id === conv.id
-                          ? 'bg-neutral-100 border border-neutral-200'
-                          : 'hover:bg-neutral-50'
+                          ? 'bg-neutral-200/60 font-semibold'
+                          : 'hover:bg-neutral-100/70'
                       )}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative flex-shrink-0">
-                          <img
-                            src={conv.lawyerAvatar}
-                            alt={conv.lawyerName}
-                            className="h-9 w-9 rounded-full object-cover border border-neutral-200"
-                          />
-                          {conv.unreadCount > 0 && (
-                            <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-black ring-2 ring-white" />
-                          )}
+                      <div className="relative flex-shrink-0">
+                        <img
+                          src={conv.lawyerAvatar}
+                          alt={conv.lawyerName}
+                          className="h-10 w-10 rounded-full object-cover border border-neutral-200"
+                        />
+                        {conv.unreadCount > 0 && (
+                          <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-black ring-2 ring-white" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="text-xs font-bold text-black truncate">{conv.lawyerName}</span>
+                          <span className="text-[10px] text-neutral-400 flex-shrink-0 ml-2">
+                            {formatTime(conv.lastMessageTimestamp)}
+                          </span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-xs font-bold text-black truncate">{conv.lawyerName}</span>
-                            <span className="text-[9px] text-neutral-400 flex-shrink-0 ml-2">
-                              {formatTime(conv.lastMessageTimestamp)}
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-neutral-500 truncate">{conv.lastMessage}</p>
-                        </div>
+                        <p className="text-[11px] text-neutral-500 truncate">{conv.lastMessage}</p>
                       </div>
                     </button>
                   ))}
