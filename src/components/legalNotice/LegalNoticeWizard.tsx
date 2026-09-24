@@ -3,7 +3,6 @@ import {
   FileText, 
   Send, 
   Users, 
-  CheckCircle2, 
   X, 
   Sparkles, 
   Copy, 
@@ -12,7 +11,6 @@ import {
   ArrowRight,
   Gavel
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
 import { lawyerService, threadService, messageService } from '@/services';
 import { Lawyer } from '@/types/lawyer';
@@ -68,7 +66,7 @@ export const LegalNoticeWizard: React.FC<LegalNoticeWizardProps> = ({
   // Form states
   const [noticeType, setNoticeType] = useState('cheque_489f');
   const [senderName, setSenderName] = useState('Muhammad Bilal Khan');
-  const [senderCity, setSenderCity] = useState('Lahore, Pakistan');
+  const [senderCity] = useState('Lahore, Pakistan');
   const [recipientName, setRecipientName] = useState('Sheikh Tariq Mahmood');
   const [recipientAddress, setRecipientAddress] = useState('Gulberg III, Lahore');
   const [demandAmount, setDemandAmount] = useState('1500000');
@@ -463,7 +461,7 @@ Location: ${senderCity}`;
               options={lawyersList.map((l) => ({
                 value: l.id,
                 label: l.name,
-                sublabel: `${l.title} • ${l.city} (${l.experienceYears} Yrs Exp)`
+                sublabel: `${l.courtEnrollment || 'Advocate High Court'} • ${l.city} (${l.experienceYears} Yrs Exp)`
               }))}
             />
 

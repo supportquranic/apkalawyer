@@ -7,12 +7,9 @@ import {
   Building2, 
   Sparkles, 
   ShieldCheck, 
-  Search, 
-  CheckCircle2, 
-  ArrowRight,
-  ShieldAlert,
   Gavel
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { FreeLegalToolsWizard, FREE_LEGAL_TOOLS, LegalToolCategory } from '@/components/legalTools/FreeLegalToolsWizard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/routes/paths';
@@ -31,7 +28,7 @@ export const ClientLegalDocsPage: React.FC = () => {
     setTimeout(() => setToastMessage(null), 4000);
   };
 
-  const openToolWizard = (toolId: string, category: LegalToolCategory) => {
+  const openToolWizard = (toolId: string) => {
     setSelectedToolId(toolId);
     setIsWizardOpen(true);
   };
@@ -75,7 +72,7 @@ export const ClientLegalDocsPage: React.FC = () => {
 
           <button
             type="button"
-            onClick={() => openToolWizard('notice_cheque_489f', 'notice')}
+            onClick={() => openToolWizard('notice_cheque_489f')}
             className="glass-btn gap-2 px-6 py-3 text-xs font-bold text-black whitespace-nowrap shadow-sm"
           >
             <Sparkles className="h-4 w-4 text-black" />
@@ -166,7 +163,7 @@ export const ClientLegalDocsPage: React.FC = () => {
             <div className="space-y-2 pt-2 border-t border-neutral-100">
               <button
                 type="button"
-                onClick={() => openToolWizard(tool.id, tool.category)}
+                onClick={() => openToolWizard(tool.id)}
                 className="w-full glass-btn py-2.5 text-xs font-bold text-black gap-2 justify-center"
               >
                 <Sparkles className="h-3.5 w-3.5 text-black" />

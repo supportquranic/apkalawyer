@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FileText, 
   Send, 
-  Users, 
   CheckCircle2, 
   X, 
   Sparkles, 
   Copy, 
   Check, 
   ShieldCheck, 
-  ArrowRight,
   Gavel,
   FileCheck2,
   FileSignature,
   Building2,
   Briefcase,
-  Search,
-  Download
+  Search
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
@@ -872,7 +869,7 @@ WITNESS 2: _____________________`;
               options={lawyersList.map((l) => ({
                 value: l.id,
                 label: l.name,
-                sublabel: `${l.title} • ${l.city} (${l.experienceYears} Yrs Exp)`
+                sublabel: `${l.courtEnrollment || 'Advocate High Court'} • ${l.city} (${l.experienceYears} Yrs Exp)`
               }))}
             />
 

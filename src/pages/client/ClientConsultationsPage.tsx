@@ -12,7 +12,6 @@ import {
   Image as ImageIcon, 
   X, 
   CheckCircle2, 
-  ShieldCheck, 
   Search, 
   Gavel, 
   Clock,
