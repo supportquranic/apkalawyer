@@ -404,7 +404,7 @@ export const ClientConsultationsPage: React.FC = () => {
                   className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-xs hover:border-neutral-300 transition-all space-y-3"
                 >
                   {/* Post Author Bar */}
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       <img
                         src={thread.authorAvatar}
@@ -425,10 +425,6 @@ export const ClientConsultationsPage: React.FC = () => {
                         </div>
                       </div>
                     </div>
-
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-full border border-neutral-200 whitespace-nowrap flex-shrink-0">
-                      {thread.category}
-                    </span>
                   </div>
 
                   {/* Title & Unified Content (Supports English / Urdu naturally) */}
