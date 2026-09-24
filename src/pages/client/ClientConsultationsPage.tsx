@@ -86,6 +86,12 @@ export const ClientConsultationsPage: React.FC = () => {
     loadThreads();
   }, [selectedCategory, searchQuery]);
 
+  useEffect(() => {
+    if ((locationState.state as any)?.openComposer) {
+      setIsComposerOpen(true);
+    }
+  }, [locationState.state, locationState.key]);
+
   const toggleExpand = (threadId: string) => {
     setExpandedThreadIds((prev) => ({
       ...prev,
@@ -198,8 +204,8 @@ export const ClientConsultationsPage: React.FC = () => {
 
 
 
-      {/* Thread Composer Modal / Card */}
-      {isComposerOpen && (
+      {/* If Composer is open, display ONLY the post creation card, not the feed under it */}
+      {isComposerOpen ? (
         <form
           onSubmit={handleCreatePost}
           className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-3.5 transition-all"
@@ -213,23 +219,35 @@ export const ClientConsultationsPage: React.FC = () => {
               />
               <div>
                 <p className="text-xs font-bold text-black">{user?.name || 'Client Account'}</p>
-                <p className="text-[11px] text-neutral-400">Public Consultation Post</p>
+                <p className="text-[11px] text-neutral-400">Post New Case / Consultation</p>
               </div>
             </div>
 
-            {/* Category selection */}
-            <select
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-              aria-label="Select Category"
-              className="text-xs font-semibold bg-neutral-100 border border-neutral-200 rounded-lg px-2.5 py-1.5 text-black outline-none focus:ring-1 focus:ring-black"
-            >
-              {CATEGORIES.filter((c) => c !== 'All Matters').map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-2">
+              {/* Category selection */}
+              <select
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+                aria-label="Select Category"
+                className="text-xs font-semibold bg-neutral-100 border border-neutral-200 rounded-lg px-2.5 py-1.5 text-black outline-none focus:ring-1 focus:ring-black"
+              >
+                {CATEGORIES.filter((c) => c !== 'All Matters').map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setIsComposerOpen(false)}
+                className="p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
+                aria-label="Close composer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
           {/* Title */}
@@ -296,22 +314,29 @@ export const ClientConsultationsPage: React.FC = () => {
               <span>Attach Image (Max 2)</span>
             </button>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="glass-btn gap-1.5 px-4 py-1.5 text-xs font-bold text-black"
-            >
-              <Send className="h-3 w-3" />
-              <span>{isSubmitting ? 'Posting...' : 'Post Thread'}</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsComposerOpen(false)}
+                className="px-3.5 py-1.5 text-xs font-semibold text-neutral-600 hover:text-black rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="glass-btn gap-1.5 px-4 py-1.5 text-xs font-bold text-black"
+              >
+                <Send className="h-3 w-3" />
+                <span>{isSubmitting ? 'Posting...' : 'Post Case'}</span>
+              </button>
+            </div>
           </div>
         </form>
-      )}
-
-      {/* =========================================================================
-          CONSULTATIONS FEED
-         ========================================================================= */}
-      {!isLoading && (
+      ) : (
+        /* =========================================================================
+            CONSULTATIONS FEED (Visible when composer is closed)
+           ========================================================================= */
         <div className="space-y-4">
           {/* Filter & Search Bar */}
           <div className="space-y-2.5">
