@@ -9,7 +9,10 @@ const ASSETS_TO_CACHE = [
   '/icons/icon-512.png',
   '/icons/app-lawyer-booking.webp',
   '/icons/app-video-consultation.webp',
-  '/icons/app-track-case.webp'
+  '/icons/app-track-case.webp',
+  '/images/card-lawyer.webp',
+  '/images/card-consultation.webp',
+  '/images/card-legal-notice.webp'
 ];
 
 self.addEventListener('install', (event) => {
