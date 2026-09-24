@@ -25,6 +25,7 @@ export const documentService: IDocumentService = new MockDocumentService();
 export const messageService: IMessageService = new MockMessageService();
 export const paymentService: IPaymentService = new MockPaymentService();
 export const notificationService: INotificationService = new MockNotificationService();
+export { threadService } from './mock/thread.mock.service';
 
 export * from './interfaces/lawyer.service.interface';
 export * from './interfaces/booking.service.interface';
@@ -34,3 +35,4 @@ export * from './interfaces/document.service.interface';
 export * from './interfaces/message.service.interface';
 export * from './interfaces/payment.service.interface';
 export * from './interfaces/notification.service.interface';
+
