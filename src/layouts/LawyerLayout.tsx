@@ -129,7 +129,7 @@ export const LawyerLayout: React.FC = () => {
       {/* Mobile Floating Bottom Navigation Bar (Exact Liquid Glass Toggle) */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav grid grid-cols-5 items-center z-50 md:hidden"
+        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav z-50 md:hidden"
       >
         {mobileBottomNavItems.map((item) => {
           const isActive = location.pathname === item.path;

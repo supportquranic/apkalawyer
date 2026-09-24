@@ -185,14 +185,14 @@ export const ClientLayout: React.FC = () => {
         ref={navRef}
         onPointerMove={handlePointerMove}
         aria-label="Mobile Navigation"
-        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav grid grid-cols-5 items-center z-50 md:hidden"
+        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav z-50 md:hidden"
       >
         {/* Sliding Thumb */}
         <span
           className="glass-thumb pointer-events-none"
           style={{
             transform: `translateX(calc(${activeIndex} * 100%))`,
-            width: `calc(100% / ${mobileBottomNavItems.length})`,
+            width: `calc((100% - 6px) / ${mobileBottomNavItems.length})`,
           }}
         />
 
