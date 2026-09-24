@@ -226,7 +226,7 @@
 .auto-scroll-track {
   display: flex;
   gap: 6px;
-  animation: autoScroll 20s linear infinite;
+  animation: autoScroll 45s linear infinite;
   width: max-content;
 }
 
