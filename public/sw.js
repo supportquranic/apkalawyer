@@ -14,7 +14,7 @@ const ASSETS_TO_CACHE = [
   '/images/card-consultation.webp',
   '/images/card-legal-notice.webp',
   '/images/senior-lawyer-headshot.webp',
-  '/images/lawyer-headroom-studio.webp'
+  '/images/senior-lawyer-pure-white.webp'
 ];
 
 self.addEventListener('install', (event) => {

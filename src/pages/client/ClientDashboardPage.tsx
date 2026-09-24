@@ -47,28 +47,28 @@ export const ClientDashboardPage: React.FC = () => {
     <div className="space-y-3 sm:space-y-4 max-w-4xl mx-auto pb-10 pt-1">
       {/* Main Bento Grid: Side-by-side in Mobile & Desktop */}
       <div className="grid grid-cols-2 gap-2.5 sm:gap-4 items-stretch">
-        {/* Big Card (Left Column): Book a Lawyer with Headroom Text & No Black Overlay */}
+        {/* Big Card (Left Column): Book a Lawyer with Pure White Background Headshot */}
         <Link
           to={ROUTES.CLIENT.LAWYERS}
-          className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-neutral-100 flex flex-col justify-between p-3.5 sm:p-6 shadow-xs hover:shadow-lg transition-all duration-300 border border-neutral-200 min-h-[320px] sm:min-h-[460px]"
+          className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-white flex flex-col justify-between p-3.5 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 border border-neutral-200 min-h-[320px] sm:min-h-[460px]"
         >
-          {/* Natural Portrait with Headroom (No dark overlay) */}
+          {/* Pure White Background Senior Pakistani Lawyer Headshot */}
           <img
-            src="/images/lawyer-headroom-studio.webp"
-            alt="Lawyer"
-            className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+            src="/images/senior-lawyer-pure-white.webp"
+            alt="Senior Advocate"
+            className="absolute inset-0 w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
           />
 
-          {/* Top Headroom Space: Clean Text */}
+          {/* Top Headroom Space: Clean Black Text */}
           <div className="relative z-10">
-            <h2 className="text-base sm:text-2xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-tight">
+            <h2 className="text-base sm:text-2xl font-bold text-black tracking-tight">
               Book a Lawyer
             </h2>
           </div>
 
           {/* Bottom Action Pill */}
           <div className="relative z-10 pt-2">
-            <span className="inline-flex items-center gap-1 sm:gap-1.5 bg-white text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md group-hover:bg-neutral-100 transition-colors">
+            <span className="inline-flex items-center gap-1 sm:gap-1.5 bg-black text-white text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm group-hover:bg-neutral-800 transition-colors">
               <span>Book Now</span>
               <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
