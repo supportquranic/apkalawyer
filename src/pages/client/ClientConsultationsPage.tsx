@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocation } from 'react-router-dom';
+import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
 
 const CATEGORIES = [
   'All Matters',
@@ -210,48 +211,47 @@ export const ClientConsultationsPage: React.FC = () => {
           onSubmit={handleCreatePost}
           className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-3.5 transition-all"
         >
+          {/* Header */}
           <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5 min-w-0">
               <img
                 src={user?.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}
                 alt="Profile"
-                className="h-9 w-9 rounded-full object-cover border border-neutral-200"
+                className="h-9 w-9 rounded-full object-cover border border-neutral-200 flex-shrink-0"
               />
-              <div>
-                <p className="text-xs font-bold text-black">{user?.name || 'Client Account'}</p>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-black truncate">{user?.name || 'Client Account'}</p>
                 <p className="text-[11px] text-neutral-400">Post New Case / Consultation</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              {/* Category selection */}
-              <select
-                value={newCategory}
-                onChange={(e) => setNewCategory(e.target.value)}
-                aria-label="Select Category"
-                className="text-xs font-semibold bg-neutral-100 border border-neutral-200 rounded-lg px-2.5 py-1.5 text-black outline-none focus:ring-1 focus:ring-black"
-              >
-                {CATEGORIES.filter((c) => c !== 'All Matters').map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={() => setIsComposerOpen(false)}
-                className="p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
-                aria-label="Close composer"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsComposerOpen(false)}
+              className="p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100 rounded-full transition-colors flex-shrink-0"
+              aria-label="Close composer"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
 
-          {/* Title */}
+          {/* Category Dropdown (Before Brief) */}
           <div>
+            <ThemedDropdown
+              value={newCategory}
+              onChange={setNewCategory}
+              options={CATEGORIES.filter((c) => c !== 'All Matters')}
+              placeholder="Select Case Matter Category"
+              label="Legal Matter Category"
+            />
+          </div>
+
+          {/* Title / Brief */}
+          <div>
+            <label className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">
+              Case Brief / Title
+            </label>
             <input
               type="text"
               placeholder="Brief summary or question (English / اردو)..."
@@ -264,6 +264,9 @@ export const ClientConsultationsPage: React.FC = () => {
 
           {/* Single Natural Content Box (English / Urdu) */}
           <div>
+            <label className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">
+              Case Details & Questions
+            </label>
             <textarea
               rows={4}
               dir="auto"
@@ -297,17 +300,15 @@ export const ClientConsultationsPage: React.FC = () => {
             </div>
           )}
 
-          {/* Actions footer */}
+          {/* Actions footer - Uniform styled buttons */}
           <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
             <button
               type="button"
               onClick={handleAddImage}
               disabled={attachedImages.length >= 2}
               className={cn(
-                'flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-neutral-200 transition-colors',
-                attachedImages.length >= 2
-                  ? 'opacity-40 cursor-not-allowed bg-neutral-100 text-neutral-400'
-                  : 'bg-white hover:bg-neutral-50 text-neutral-700'
+                'glass-btn gap-1.5 px-3.5 py-2 text-xs font-bold text-neutral-700 hover:text-black',
+                attachedImages.length >= 2 && 'opacity-40 cursor-not-allowed pointer-events-none'
               )}
             >
               <ImageIcon className="h-3.5 w-3.5" />
@@ -318,16 +319,16 @@ export const ClientConsultationsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsComposerOpen(false)}
-                className="px-3.5 py-1.5 text-xs font-semibold text-neutral-600 hover:text-black rounded-lg transition-colors"
+                className="glass-btn px-3.5 py-2 text-xs font-bold text-neutral-600 hover:text-black"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="glass-btn gap-1.5 px-4 py-1.5 text-xs font-bold text-black"
+                className="glass-btn gap-1.5 px-4 py-2 text-xs font-bold text-black"
               >
-                <Send className="h-3 w-3" />
+                <Send className="h-3.5 w-3.5" />
                 <span>{isSubmitting ? 'Posting...' : 'Post Case'}</span>
               </button>
             </div>

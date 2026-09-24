@@ -8,6 +8,7 @@ import { LoadingState, EmptyState } from '@/components/feedback';
 import { MapPin, ArrowRight, Check } from 'lucide-react';
 import { PAKISTAN_CITIES } from '@/data/constants/cities';
 import { PRACTICE_AREAS_DATA } from '@/data/constants/practiceAreas';
+import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
 
 export const LawyersPage: React.FC = () => {
   const [lawyers, setLawyers] = useState<Lawyer[]>([]);
@@ -40,6 +41,16 @@ export const LawyersPage: React.FC = () => {
     };
   }, [selectedCity, selectedArea]);
 
+  const practiceAreaOptions = [
+    { value: '', label: 'All Practice Areas' },
+    ...PRACTICE_AREAS_DATA.map((pa) => ({ value: pa.name, label: pa.name }))
+  ];
+
+  const cityOptions = [
+    { value: '', label: 'All Cities' },
+    ...PAKISTAN_CITIES.map((c) => ({ value: c.value, label: c.label }))
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -53,41 +64,25 @@ export const LawyersPage: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="p-4 border border-neutral-200 rounded-xl bg-neutral-50/50 mb-8 flex flex-col sm:flex-row gap-3">
-        <div className="flex-1">
-          <label className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1">
-            Practice Area
-          </label>
-          <select
+      <div className="p-4 border border-neutral-200 rounded-2xl bg-white shadow-xs mb-8 flex flex-col sm:flex-row gap-3 items-end">
+        <div className="flex-1 w-full">
+          <ThemedDropdown
+            label="Practice Area"
             value={selectedArea}
-            onChange={(e) => setSelectedArea(e.target.value)}
-            className="w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs text-black focus:outline-none focus:border-black"
-          >
-            <option value="">All Practice Areas</option>
-            {PRACTICE_AREAS_DATA.map((pa) => (
-              <option key={pa.id} value={pa.name}>
-                {pa.name}
-              </option>
-            ))}
-          </select>
+            onChange={setSelectedArea}
+            options={practiceAreaOptions}
+            placeholder="All Practice Areas"
+          />
         </div>
 
-        <div className="flex-1">
-          <label className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-1">
-            City / Jurisdiction
-          </label>
-          <select
+        <div className="flex-1 w-full">
+          <ThemedDropdown
+            label="City / Jurisdiction"
             value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-            className="w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs text-black focus:outline-none focus:border-black"
-          >
-            <option value="">All Cities</option>
-            {PAKISTAN_CITIES.map((c) => (
-              <option key={c.value} value={c.value}>
-                {c.label}
-              </option>
-            ))}
-          </select>
+            onChange={setSelectedCity}
+            options={cityOptions}
+            placeholder="All Cities"
+          />
         </div>
 
         {(selectedCity || selectedArea) && (
