@@ -21,7 +21,7 @@ import {
   Inbox
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/routes/paths';
 
 const CATEGORIES = [
@@ -39,14 +39,18 @@ export const ClientConsultationsPage: React.FC = () => {
   useSEO({ title: 'Legal Consultations & Advocate Advices — ApkaLawyer', noIndex: true });
   const { user } = useAuth();
 
+  const locationState = useLocation();
+
   const [activeTab, setActiveTab] = useState<'feed' | 'my_offers'>('feed');
   const [threads, setThreads] = useState<LegalThread[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All Matters');
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Composer state
-  const [isComposerOpen, setIsComposerOpen] = useState(false);
+  // Composer state — auto-open when navigated from header + button
+  const [isComposerOpen, setIsComposerOpen] = useState(
+    !!(locationState.state as any)?.openComposer
+  );
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
   const [newCategory, setNewCategory] = useState('Property & Land Dispute');
@@ -393,26 +397,28 @@ export const ClientConsultationsPage: React.FC = () => {
               />
             </div>
 
-            {/* Categories scrollable pill bar */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-              {CATEGORIES.map((cat) => {
-                const isSelected = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setSelectedCategory(cat)}
-                    className={cn(
-                      'whitespace-nowrap px-3 py-1 rounded-full text-xs font-semibold transition-all',
-                      isSelected
-                        ? 'bg-black text-white shadow-xs'
-                        : 'bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300'
-                    )}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
+            {/* Categories auto-scroll pill bar */}
+            <div className="overflow-hidden no-scrollbar">
+              <div className="auto-scroll-track">
+                {[...CATEGORIES, ...CATEGORIES].map((cat, idx) => {
+                  const isSelected = selectedCategory === cat;
+                  return (
+                    <button
+                      key={`${cat}-${idx}`}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={cn(
+                        'whitespace-nowrap px-3 py-1 rounded-full text-xs font-semibold transition-all flex-shrink-0',
+                        isSelected
+                          ? 'bg-black text-white shadow-xs'
+                          : 'bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300'
+                      )}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

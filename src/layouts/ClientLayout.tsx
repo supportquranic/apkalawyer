@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/routes/paths';
 import { 
   LayoutDashboard, 
@@ -13,7 +13,8 @@ import {
   CreditCard, 
   Bell, 
   User, 
-  LogOut
+  LogOut,
+  Plus
 } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { cn } from '@/lib/utils';
@@ -21,6 +22,7 @@ import { cn } from '@/lib/utils';
 export const ClientLayout: React.FC = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const navRef = useRef<HTMLElement>(null);
 
   // Full sidebar items for desktop
@@ -42,7 +44,7 @@ export const ClientLayout: React.FC = () => {
   const mobileBottomNavItems = [
     { label: 'Home', path: ROUTES.CLIENT.DASHBOARD },
     { label: 'Lawyers', path: ROUTES.CLIENT.LAWYERS },
-    { label: 'Consults', path: ROUTES.CLIENT.CONSULTATIONS },
+    { label: 'Cases', path: ROUTES.CLIENT.CONSULTATIONS },
     { label: 'Matters', path: ROUTES.CLIENT.MATTERS },
     { label: 'Profile', path: ROUTES.CLIENT.PROFILE },
   ];
@@ -142,16 +144,23 @@ export const ClientLayout: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0 pb-24 md:pb-6">
         {/* Compact App Header */}
         <header className="h-14 bg-white border-b border-neutral-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
-          <div className="flex items-center gap-2.5">
-            <span className="font-bold text-sm text-black tracking-tight flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-sm text-black tracking-tight flex items-center gap-1">
               Apka<span className="font-normal text-neutral-500">Lawyer</span>
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-700 px-1.5 py-0.5 rounded border border-neutral-200/80">
-              Verified
             </span>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            {/* Post Case Button */}
+            <button
+              type="button"
+              onClick={() => navigate(ROUTES.CLIENT.CONSULTATIONS, { state: { openComposer: true } })}
+              className="relative p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
+              aria-label="Post a new case"
+            >
+              <Plus className="h-4.5 w-4.5" />
+            </button>
+            {/* Messages Button */}
             <Link
               to={ROUTES.CLIENT.MESSAGES}
               className="relative p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
@@ -160,9 +169,10 @@ export const ClientLayout: React.FC = () => {
               <MessageSquare className="h-4 w-4" />
               <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-black ring-2 ring-white" />
             </Link>
+            {/* Profile Avatar */}
             <Link
               to={ROUTES.CLIENT.PROFILE}
-              className="flex items-center gap-2 p-1 rounded-full hover:bg-neutral-100 transition-colors"
+              className="flex items-center p-0.5 rounded-full hover:bg-neutral-100 transition-colors"
               aria-label="Profile"
             >
               <img

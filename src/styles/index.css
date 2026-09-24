@@ -208,5 +208,28 @@
   transform: scale(0.97);
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
+/* Auto-scroll marquee for category pills */
+@keyframes autoScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
+.auto-scroll-track {
+  display: flex;
+  gap: 6px;
+  animation: autoScroll 20s linear infinite;
+  width: max-content;
+}
+
+.auto-scroll-track:hover {
+  animation-play-state: paused;
+}
