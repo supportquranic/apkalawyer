@@ -13,8 +13,8 @@ export const LawyerVerificationPage: React.FC = () => {
       </div>
 
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900">
-          <ShieldCheck className="h-6 w-6 text-emerald-600 flex-shrink-0" />
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-neutral-100 border border-neutral-200 text-neutral-900">
+          <ShieldCheck className="h-6 w-6 text-black flex-shrink-0" />
           <div>
             <h3 className="text-sm font-bold">Bar License Verified & Active</h3>
             <p className="text-xs mt-0.5">
@@ -41,7 +41,7 @@ export const LawyerVerificationPage: React.FC = () => {
 
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
             <span className="text-slate-400 font-semibold block text-[10px] uppercase">Verification Tier</span>
-            <span className="font-bold text-emerald-600 text-sm mt-1 block">Tier 1 Bar Certified</span>
+            <span className="font-bold text-black text-sm mt-1 block">Tier 1 Bar Certified</span>
           </div>
         </div>
       </div>

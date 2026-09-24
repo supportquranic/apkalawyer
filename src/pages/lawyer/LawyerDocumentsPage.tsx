@@ -34,7 +34,7 @@ export const LawyerDocumentsPage: React.FC = () => {
           type="button"
           className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition-colors shadow-sm"
         >
-          <Upload className="h-3.5 w-3.5 text-emerald-400" />
+          <Upload className="h-3.5 w-3.5 text-neutral-400" />
           Upload Court Document
         </button>
       </div>
@@ -55,7 +55,7 @@ export const LawyerDocumentsPage: React.FC = () => {
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="text-slate-400 font-mono text-[10px]">{doc.matterNumber || 'General'}</span>
-              <span className="text-emerald-600 font-semibold flex items-center gap-1 cursor-pointer hover:underline">
+              <span className="text-black font-semibold flex items-center gap-1 cursor-pointer hover:underline">
                 <Download className="h-3 w-3" />
                 Download PDF
               </span>

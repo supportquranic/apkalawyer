@@ -12,7 +12,8 @@ const ASSETS_TO_CACHE = [
   '/icons/app-track-case.webp',
   '/images/card-lawyer.webp',
   '/images/card-consultation.webp',
-  '/images/card-legal-notice.webp'
+  '/images/card-legal-notice.webp',
+  '/images/senior-lawyer-headshot.webp'
 ];
 
 self.addEventListener('install', (event) => {

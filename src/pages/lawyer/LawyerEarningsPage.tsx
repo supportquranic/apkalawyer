@@ -35,7 +35,7 @@ export const LawyerEarningsPage: React.FC = () => {
         </div>
         <div className="text-left sm:text-right">
           <span className="text-[10px] uppercase font-bold text-slate-400 block">Cleared Balance</span>
-          <span className="text-xl font-bold text-emerald-600">{formatPKR(totalPaid)}</span>
+          <span className="text-xl font-bold text-black">{formatPKR(totalPaid)}</span>
         </div>
       </div>
 
@@ -58,7 +58,7 @@ export const LawyerEarningsPage: React.FC = () => {
                 <td className="p-4 text-slate-600">{inv.description}</td>
                 <td className="p-4 font-bold text-slate-900">{formatPKR(inv.totalAmount)}</td>
                 <td className="p-4">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
                     {inv.status}
                   </span>
                 </td>

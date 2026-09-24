@@ -23,7 +23,7 @@ export const ClientProfilePage: React.FC = () => {
             className="h-16 w-16 rounded-2xl object-cover border border-slate-200"
           />
           <div>
-            <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 text-black text-xs font-semibold">
               <ShieldCheck className="h-4 w-4" />
               Verified Client Profile
             </div>
@@ -56,7 +56,7 @@ export const ClientProfilePage: React.FC = () => {
 
           <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
             <span className="text-slate-400 font-semibold block text-[10px] uppercase">Account Security</span>
-            <span className="font-bold text-emerald-600 text-sm mt-0.5 block">
+            <span className="font-bold text-black text-sm mt-0.5 block">
               Two-Factor Ready (SMS OTP)
             </span>
           </div>

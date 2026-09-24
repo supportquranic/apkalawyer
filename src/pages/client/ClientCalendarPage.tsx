@@ -34,7 +34,7 @@ export const ClientCalendarPage: React.FC = () => {
           <div key={e.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${
-                e.type === 'hearing' ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'
+                e.type === 'hearing' ? 'bg-amber-50 text-amber-600' : 'bg-neutral-100 text-black'
               }`}>
                 {e.type === 'hearing' ? <Gavel className="h-5 w-5" /> : <Video className="h-5 w-5" />}
               </div>

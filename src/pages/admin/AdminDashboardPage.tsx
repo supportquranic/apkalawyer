@@ -7,7 +7,7 @@ export const AdminDashboardPage: React.FC = () => {
 
   const stats = [
     { label: 'Pending Bar Verifications', value: '3', icon: UserCheck, color: 'text-amber-600 bg-amber-50' },
-    { label: 'Verified Advocates', value: '28', icon: Users, color: 'text-emerald-600 bg-emerald-50' },
+    { label: 'Verified Advocates', value: '28', icon: Users, color: 'text-black bg-neutral-100' },
     { label: 'Active Legal Matters', value: '42', icon: Briefcase, color: 'text-sky-600 bg-sky-50' },
     { label: 'Escrow Volume (PKR)', value: 'PKR 1.45M', icon: CreditCard, color: 'text-indigo-600 bg-indigo-50' },
   ];

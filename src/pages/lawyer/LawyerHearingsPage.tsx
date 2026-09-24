@@ -32,7 +32,7 @@ export const LawyerHearingsPage: React.FC = () => {
         </div>
         <button
           type="button"
-          className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-emerald-500 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2.5 text-xs font-semibold text-white hover:bg-black transition-colors shadow-sm"
         >
           <Plus className="h-3.5 w-3.5" />
           Add Hearing Entry
@@ -50,7 +50,7 @@ export const LawyerHearingsPage: React.FC = () => {
                 </span>
               </div>
               <span className="text-xs font-bold text-slate-900 flex items-center gap-1">
-                <Clock className="h-3.5 w-3.5 text-emerald-600" />
+                <Clock className="h-3.5 w-3.5 text-black" />
                 {formatDate(h.hearingDate)} • {h.hearingTime}
               </span>
             </div>

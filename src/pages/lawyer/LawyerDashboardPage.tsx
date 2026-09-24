@@ -55,7 +55,7 @@ export const LawyerDashboardPage: React.FC = () => {
       {/* Top Banner */}
       <div className="rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 p-6 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/20 text-neutral-300 text-xs font-semibold mb-2">
             <ShieldCheck className="h-3.5 w-3.5" />
             <span>Punjab Bar Council • High Court License Active</span>
           </div>
@@ -64,7 +64,7 @@ export const LawyerDashboardPage: React.FC = () => {
         </div>
         <div className="text-left sm:text-right">
           <span className="text-[10px] text-slate-400 uppercase font-semibold block">Total Retainers Collected</span>
-          <span className="text-xl font-bold text-emerald-400">{formatPKR(totalCollected)}</span>
+          <span className="text-xl font-bold text-neutral-400">{formatPKR(totalCollected)}</span>
         </div>
       </div>
 
@@ -72,7 +72,7 @@ export const LawyerDashboardPage: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2 text-slate-500 text-xs mb-2">
-            <Briefcase className="h-4 w-4 text-emerald-600" />
+            <Briefcase className="h-4 w-4 text-black" />
             <span>Active Matters</span>
           </div>
           <p className="text-2xl font-bold text-slate-900">{matters.length}</p>
@@ -107,7 +107,7 @@ export const LawyerDashboardPage: React.FC = () => {
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-bold text-slate-900">Today & Upcoming Court Cause List</h3>
-          <Link to={ROUTES.LAWYER.HEARINGS} className="text-xs font-semibold text-emerald-600 hover:text-emerald-700">
+          <Link to={ROUTES.LAWYER.HEARINGS} className="text-xs font-semibold text-black hover:text-black">
             Open Full Court Diary
           </Link>
         </div>
@@ -126,7 +126,7 @@ export const LawyerDashboardPage: React.FC = () => {
               </div>
               <div className="text-left sm:text-right">
                 <span className="text-xs font-bold text-slate-900 block">{formatDate(h.hearingDate)}</span>
-                <span className="text-[11px] text-emerald-600 font-semibold">{h.hearingTime}</span>
+                <span className="text-[11px] text-black font-semibold">{h.hearingTime}</span>
               </div>
             </div>
           ))}

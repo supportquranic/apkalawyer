@@ -44,7 +44,7 @@ export const ClientHearingsPage: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold text-slate-900">
-                  <Clock className="h-3.5 w-3.5 text-emerald-600" />
+                  <Clock className="h-3.5 w-3.5 text-black" />
                   <span>{formatDate(h.hearingDate)} • {h.hearingTime}</span>
                 </div>
               </div>
@@ -61,7 +61,7 @@ export const ClientHearingsPage: React.FC = () => {
                   </p>
                 )}
                 {h.orderSummary && (
-                  <p className="text-emerald-800 pt-1 border-t border-slate-200/60 font-medium">
+                  <p className="text-black pt-1 border-t border-slate-200/60 font-medium">
                     <strong>Judicial Order Summary:</strong> {h.orderSummary}
                   </p>
                 )}

@@ -33,7 +33,7 @@ export const ClientNotificationsPage: React.FC = () => {
       <div className="space-y-3">
         {notifications.map((n) => (
           <div key={n.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex items-start gap-3">
-            <div className="h-9 w-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+            <div className="h-9 w-9 rounded-xl bg-neutral-100 text-black flex items-center justify-center flex-shrink-0">
               <Bell className="h-4 w-4" />
             </div>
             <div className="flex-1">

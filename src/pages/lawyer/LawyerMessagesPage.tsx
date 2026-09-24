@@ -65,7 +65,7 @@ export const LawyerMessagesPage: React.FC = () => {
                 messageService.getMessages(conv.id).then(setMessages);
               }}
               className={`p-3 rounded-xl cursor-pointer transition-all ${
-                activeConv?.id === conv.id ? 'bg-emerald-50 border border-emerald-200' : 'hover:bg-slate-50'
+                activeConv?.id === conv.id ? 'bg-neutral-100 border border-neutral-200' : 'hover:bg-slate-50'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
@@ -86,7 +86,7 @@ export const LawyerMessagesPage: React.FC = () => {
                   <p className="text-[10px] text-slate-500">{activeConv.matterTitle || 'Client Communication'}</p>
                 </div>
                 <div className="flex items-center gap-1 text-[11px] text-slate-400">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                  <ShieldCheck className="h-3.5 w-3.5 text-black" />
                   Privileged
                 </div>
               </div>
@@ -119,13 +119,13 @@ export const LawyerMessagesPage: React.FC = () => {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Type an advisory reply..."
-                  className="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-emerald-600 focus:outline-none"
+                  className="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-neutral-600 focus:outline-none"
                 />
                 <button
                   type="submit"
                   className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition-colors"
                 >
-                  <Send className="h-4 w-4 text-emerald-400" />
+                  <Send className="h-4 w-4 text-neutral-400" />
                 </button>
               </form>
             </>

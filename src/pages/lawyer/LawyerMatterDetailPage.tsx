@@ -35,7 +35,7 @@ export const LawyerMatterDetailPage: React.FC = () => {
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono font-bold text-slate-400">{matter.matterNumber}</span>
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
             {matter.status.replace('_', ' ')}
           </span>
         </div>

@@ -22,7 +22,7 @@ export const LawyerChamberProfilePage: React.FC = () => {
             className="h-16 w-16 rounded-2xl object-cover border border-slate-200"
           />
           <div>
-            <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 text-black text-xs font-semibold">
               <ShieldCheck className="h-4 w-4" />
               Verified Advocate High Court
             </div>

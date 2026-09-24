@@ -42,7 +42,7 @@ export const ClientMattersPage: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-bold text-slate-400">{matter.matterNumber}</span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
                       {matter.status.replace('_', ' ')}
                     </span>
                   </div>
@@ -68,19 +68,19 @@ export const ClientMattersPage: React.FC = () => {
                       key={ms.id}
                       className={`p-3 rounded-xl border text-xs flex items-start gap-2.5 ${
                         ms.completed
-                          ? 'border-emerald-200 bg-emerald-50/60 text-emerald-900'
+                          ? 'border-neutral-200 bg-neutral-100/60 text-neutral-900'
                           : 'border-slate-200 bg-slate-50 text-slate-600'
                       }`}
                     >
                       {ms.completed ? (
-                        <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-4 w-4 text-black flex-shrink-0 mt-0.5" />
                       ) : (
                         <Circle className="h-4 w-4 text-slate-400 flex-shrink-0 mt-0.5" />
                       )}
                       <div>
                         <p className="font-semibold leading-snug">{ms.title}</p>
                         {ms.dateCompleted && (
-                          <p className="text-[10px] text-emerald-700 mt-0.5">Completed {ms.dateCompleted}</p>
+                          <p className="text-[10px] text-black mt-0.5">Completed {ms.dateCompleted}</p>
                         )}
                       </div>
                     </div>

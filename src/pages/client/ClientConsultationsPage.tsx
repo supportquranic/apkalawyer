@@ -50,14 +50,14 @@ export const ClientConsultationsPage: React.FC = () => {
                   <h3 className="text-sm font-bold text-slate-900 mt-0.5">{b.lawyerName}</h3>
                   <p className="text-xs text-slate-500">{b.practiceArea}</p>
                 </div>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
                   {b.status}
                 </span>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-50 text-xs text-slate-600 space-y-1.5">
                 <div className="flex items-center gap-2 font-medium">
-                  <Calendar className="h-3.5 w-3.5 text-emerald-600" />
+                  <Calendar className="h-3.5 w-3.5 text-black" />
                   <span>{formatDate(b.date)} • {b.timeSlot}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-500">
@@ -73,7 +73,7 @@ export const ClientConsultationsPage: React.FC = () => {
                   href={b.meetingLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-600 py-2 text-xs font-semibold text-white hover:bg-emerald-500 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-black py-2 text-xs font-semibold text-white hover:bg-black transition-colors"
                 >
                   <Video className="h-3.5 w-3.5" />
                   Join Encrypted Video Room

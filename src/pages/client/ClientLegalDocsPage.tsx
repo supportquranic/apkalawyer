@@ -40,7 +40,7 @@ export const ClientLegalDocsPage: React.FC = () => {
               <h3 className="text-sm font-bold text-slate-900">{tmpl.title}</h3>
               <p className="text-xs text-slate-600 mt-1 leading-relaxed">{tmpl.description}</p>
               {tmpl.statutoryReference && (
-                <p className="text-[11px] font-mono text-emerald-700 mt-2 font-medium">
+                <p className="text-[11px] font-mono text-black mt-2 font-medium">
                   Ref: {tmpl.statutoryReference}
                 </p>
               )}
@@ -50,7 +50,7 @@ export const ClientLegalDocsPage: React.FC = () => {
               type="button"
               className="w-full flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition-colors shadow-sm"
             >
-              <FileSignature className="h-3.5 w-3.5 text-emerald-400" />
+              <FileSignature className="h-3.5 w-3.5 text-neutral-400" />
               Start Drafting Wizard
             </button>
           </div>

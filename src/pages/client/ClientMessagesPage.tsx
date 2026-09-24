@@ -66,7 +66,7 @@ export const ClientMessagesPage: React.FC = () => {
                 messageService.getMessages(conv.id).then(setMessages);
               }}
               className={`p-3 rounded-xl cursor-pointer transition-all ${
-                activeConv?.id === conv.id ? 'bg-emerald-50 border border-emerald-200' : 'hover:bg-slate-50'
+                activeConv?.id === conv.id ? 'bg-neutral-100 border border-neutral-200' : 'hover:bg-slate-50'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
@@ -85,10 +85,10 @@ export const ClientMessagesPage: React.FC = () => {
               <div className="p-4 bg-white border-b border-slate-200 flex items-center justify-between">
                 <div>
                   <h3 className="text-xs font-bold text-slate-900">{activeConv.lawyerName}</h3>
-                  <p className="text-[10px] text-emerald-600 font-medium">Advocate High Court</p>
+                  <p className="text-[10px] text-black font-medium">Advocate High Court</p>
                 </div>
                 <div className="flex items-center gap-1 text-[11px] text-slate-400">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                  <ShieldCheck className="h-3.5 w-3.5 text-black" />
                   Privileged
                 </div>
               </div>
@@ -101,12 +101,12 @@ export const ClientMessagesPage: React.FC = () => {
                       <div
                         className={`max-w-md p-3 rounded-2xl text-xs leading-relaxed ${
                           isMe
-                            ? 'bg-emerald-600 text-white rounded-br-none'
+                            ? 'bg-black text-white rounded-br-none'
                             : 'bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm'
                         }`}
                       >
                         <p>{m.content}</p>
-                        <span className={`text-[9px] mt-1 block ${isMe ? 'text-emerald-100' : 'text-slate-400'}`}>
+                        <span className={`text-[9px] mt-1 block ${isMe ? 'text-neutral-100' : 'text-slate-400'}`}>
                           {formatTime(m.timestamp)}
                         </span>
                       </div>
@@ -121,11 +121,11 @@ export const ClientMessagesPage: React.FC = () => {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Type a message to your counsel..."
-                  className="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-emerald-600 focus:outline-none"
+                  className="flex-1 rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-neutral-600 focus:outline-none"
                 />
                 <button
                   type="submit"
-                  className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500 transition-colors"
+                  className="rounded-xl bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-black transition-colors"
                 >
                   <Send className="h-4 w-4" />
                 </button>

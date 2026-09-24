@@ -34,7 +34,7 @@ export const ClientLawyersPage: React.FC = () => {
             <div className="flex items-start gap-3">
               <img src={l.avatarUrl} alt={l.name} className="h-14 w-14 rounded-xl object-cover border border-slate-200" />
               <div>
-                <span className="text-[10px] font-semibold text-emerald-600 uppercase block">{l.courtEnrollment}</span>
+                <span className="text-[10px] font-semibold text-black uppercase block">{l.courtEnrollment}</span>
                 <h3 className="text-xs font-bold text-slate-900">{l.name}</h3>
                 <p className="text-[11px] text-slate-500">{l.city} • {l.experienceYears} yrs</p>
               </div>
@@ -44,7 +44,7 @@ export const ClientLawyersPage: React.FC = () => {
               <span className="text-xs font-bold text-slate-900">{formatPKR(l.consultationFee)}</span>
               <Link
                 to={`/lawyers/${l.id}`}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-black hover:text-black"
               >
                 View Chamber Profile
                 <ArrowRight className="h-3 w-3" />

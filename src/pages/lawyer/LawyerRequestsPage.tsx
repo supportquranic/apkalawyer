@@ -45,7 +45,7 @@ export const LawyerRequestsPage: React.FC = () => {
                 </div>
                 <div className="text-left sm:text-right">
                   <span className="text-xs font-bold text-slate-900 block">{formatDate(r.date)}</span>
-                  <span className="text-xs text-emerald-600 font-medium">{r.timeSlot}</span>
+                  <span className="text-xs text-black font-medium">{r.timeSlot}</span>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@ export const LawyerRequestsPage: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-500"
+                    className="inline-flex items-center gap-1 rounded-lg bg-black px-3 py-1.5 text-xs font-semibold text-white hover:bg-black"
                   >
                     <Check className="h-3.5 w-3.5" />
                     Accept Slot

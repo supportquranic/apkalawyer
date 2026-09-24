@@ -33,7 +33,7 @@ export const LawyerMattersPage: React.FC = () => {
           type="button"
           className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition-colors shadow-sm"
         >
-          <Plus className="h-3.5 w-3.5 text-emerald-400" />
+          <Plus className="h-3.5 w-3.5 text-neutral-400" />
           Open New Matter File
         </button>
       </div>
@@ -44,7 +44,7 @@ export const LawyerMattersPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold text-slate-500">{m.matterNumber}</span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
                   {m.status.replace('_', ' ')}
                 </span>
               </div>

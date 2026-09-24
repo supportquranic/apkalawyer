@@ -44,7 +44,7 @@ export const AdminLawyersPage: React.FC = () => {
                 <td className="p-4 text-slate-600">{l.courtEnrollment}</td>
                 <td className="p-4 text-slate-600">{l.city}</td>
                 <td className="p-4">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-neutral-200 text-black">
                     Verified
                   </span>
                 </td>

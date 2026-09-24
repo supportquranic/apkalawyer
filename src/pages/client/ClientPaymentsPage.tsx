@@ -41,7 +41,7 @@ export const ClientPaymentsPage: React.FC = () => {
                 <p className="text-xs text-slate-500">{inv.lawyerName}</p>
               </div>
               <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                inv.status === 'paid' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                inv.status === 'paid' ? 'bg-neutral-200 text-black' : 'bg-amber-100 text-amber-800'
               }`}>
                 {inv.status}
               </span>
@@ -55,14 +55,14 @@ export const ClientPaymentsPage: React.FC = () => {
             <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">
               <span>Due: {formatDate(inv.dueDate)}</span>
               {inv.status === 'paid' ? (
-                <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                <span className="text-black font-semibold flex items-center gap-1">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   Paid on {formatDate(inv.paidAt!)}
                 </span>
               ) : (
                 <button
                   type="button"
-                  className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-500"
+                  className="rounded-lg bg-black px-3 py-1.5 text-xs font-semibold text-white hover:bg-black"
                 >
                   Pay via 1LINK / Card
                 </button>
