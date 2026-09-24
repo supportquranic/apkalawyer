@@ -153,10 +153,10 @@ export const ClientLayout: React.FC = () => {
         </main>
       </div>
 
-      {/* Mobile Floating Bottom Navigation Bar */}
+      {/* Mobile Floating Bottom Navigation Bar (Hyper-Realistic Frosted Glass Pill) */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-3 inset-x-4 max-w-md mx-auto bg-black text-white shadow-xl shadow-black/20 rounded-full px-3 py-2 flex items-center justify-around z-50 md:hidden border border-neutral-800"
+        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-pill-container rounded-full p-1.5 flex items-center justify-between z-50 md:hidden transition-all duration-300"
       >
         {mobileBottomNavItems.map((item) => {
           const Icon = item.icon;
@@ -166,13 +166,13 @@ export const ClientLayout: React.FC = () => {
               key={item.path}
               to={item.path}
               className={cn(
-                'flex flex-col items-center justify-center py-1 px-3 rounded-full text-[10px] transition-all',
+                'flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full text-[10px] transition-all duration-200',
                 isActive 
-                  ? 'text-white font-bold bg-neutral-800 scale-105' 
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'glass-pill-active font-semibold' 
+                  : 'glass-pill-inactive font-normal'
               )}
             >
-              <Icon className={cn('h-4 w-4 mb-0.5', isActive ? 'text-white' : 'text-neutral-400')} />
+              <Icon className={cn('h-4 w-4 mb-0.5', isActive ? 'text-white' : 'text-white/65')} />
               <span className="leading-tight">{item.label}</span>
             </Link>
           );
