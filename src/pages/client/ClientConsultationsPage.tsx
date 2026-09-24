@@ -18,8 +18,6 @@ import {
   MessageCircle,
   Clock,
   Sparkles,
-  ChevronDown,
-  ChevronUp,
   Inbox
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -528,11 +526,6 @@ export const ClientConsultationsPage: React.FC = () => {
                       >
                         <MessageSquare className="h-3.5 w-3.5" />
                         <span>{thread.advices.length} Advices</span>
-                        {isExpanded ? (
-                          <ChevronUp className="h-3 w-3" />
-                        ) : (
-                          <ChevronDown className="h-3 w-3" />
-                        )}
                       </button>
                     </div>
 

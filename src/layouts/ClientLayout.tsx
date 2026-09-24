@@ -153,11 +153,11 @@ export const ClientLayout: React.FC = () => {
           
           <div className="flex items-center gap-2">
             <Link
-              to={ROUTES.CLIENT.NOTIFICATIONS}
+              to={ROUTES.CLIENT.MESSAGES}
               className="relative p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
-              aria-label="Notifications"
+              aria-label="Messages & Offers"
             >
-              <Bell className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4" />
               <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-black ring-2 ring-white" />
             </Link>
             <Link
