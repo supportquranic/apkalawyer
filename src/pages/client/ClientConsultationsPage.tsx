@@ -25,12 +25,16 @@ import { ThemedDropdown } from '@/components/ui/ThemedDropdown';
 const CATEGORIES = [
   'All Matters',
   'Property & Land Dispute',
+  'Family, Khula & Child Custody',
+  'Criminal Defense & Bail',
+  'Civil Litigation & Inheritance',
   'Corporate & Contract Breach',
-  'Family & Khula / Maintenance',
-  'Cybercrime & Defamation',
-  'Criminal & Bail',
+  'Banking & Cheque Bounce (489-F)',
+  'Cybercrime & PECA (FIA)',
   'Labor & Employment',
-  'Consumer Court'
+  'Taxation, FBR & Customs',
+  'Constitutional & High Court Writs',
+  'Consumer Protection & Court'
 ];
 
 export const ClientConsultationsPage: React.FC = () => {
@@ -108,8 +112,8 @@ export const ClientConsultationsPage: React.FC = () => {
   };
 
   const handleAddImage = () => {
-    if (attachedImages.length >= 2) {
-      showToast('Maximum 2 images allowed per post');
+    if (attachedImages.length >= 4) {
+      showToast('Maximum 4 images allowed per post');
       return;
     }
     const sampleImages = [
@@ -277,15 +281,15 @@ export const ClientConsultationsPage: React.FC = () => {
             />
           </div>
 
-          {/* Images preview (Max 2 images) */}
+          {/* Images preview */}
           {attachedImages.length > 0 && (
             <div className="space-y-1">
               <p className="text-[11px] font-semibold text-neutral-500">
-                Attached Images / Documents ({attachedImages.length}/2):
+                Attached Images / Documents ({attachedImages.length}):
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {attachedImages.map((img, idx) => (
-                  <div key={idx} className="relative rounded-xl overflow-hidden border border-neutral-200 h-28 bg-neutral-100">
+                  <div key={idx} className="relative rounded-xl overflow-hidden border border-neutral-200 h-24 bg-neutral-100">
                     <img src={img} alt="Attached Evidence" className="w-full h-full object-cover" />
                     <button
                       type="button"
@@ -300,38 +304,25 @@ export const ClientConsultationsPage: React.FC = () => {
             </div>
           )}
 
-          {/* Actions footer - Uniform styled buttons */}
+          {/* Actions footer */}
           <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
             <button
               type="button"
               onClick={handleAddImage}
-              disabled={attachedImages.length >= 2}
-              className={cn(
-                'glass-btn gap-1.5 px-3.5 py-2 text-xs font-bold text-neutral-700 hover:text-black',
-                attachedImages.length >= 2 && 'opacity-40 cursor-not-allowed pointer-events-none'
-              )}
+              className="glass-btn gap-1.5 px-3.5 py-2 text-xs font-bold text-neutral-700 hover:text-black"
             >
               <ImageIcon className="h-3.5 w-3.5" />
-              <span>Attach Image (Max 2)</span>
+              <span>Attach Image</span>
             </button>
 
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setIsComposerOpen(false)}
-                className="glass-btn px-3.5 py-2 text-xs font-bold text-neutral-600 hover:text-black"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="glass-btn gap-1.5 px-4 py-2 text-xs font-bold text-black"
-              >
-                <Send className="h-3.5 w-3.5" />
-                <span>{isSubmitting ? 'Posting...' : 'Post Case'}</span>
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="glass-btn gap-1.5 px-4 py-2 text-xs font-bold text-black"
+            >
+              <Send className="h-3.5 w-3.5" />
+              <span>{isSubmitting ? 'Posting...' : 'Post Case'}</span>
+            </button>
           </div>
         </form>
       ) : (
