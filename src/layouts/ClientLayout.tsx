@@ -67,11 +67,11 @@ export const ClientLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen flex bg-[#F9FAFB] text-black">
-      {/* Liquid Glass Refraction Filter Definition */}
+      {/* Liquid Glass Refraction Filter Definition (Exact from Reference) */}
       <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
         <filter id="lens" x="-10%" y="-10%" width="120%" height="120%">
           <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="4" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="38" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
       </svg>
 
@@ -180,19 +180,19 @@ export const ClientLayout: React.FC = () => {
         </main>
       </div>
 
-      {/* Mobile Floating Bottom Navigation Bar (Ultra-Realistic Liquid Glass Toggle) */}
+      {/* Mobile Floating Bottom Navigation Bar (Exact Liquid Glass Effect) */}
       <nav
         ref={navRef}
         onPointerMove={handlePointerMove}
         aria-label="Mobile Navigation"
-        className="fixed bottom-4 inset-x-4 max-w-md mx-auto liquid-glass-nav p-1 flex items-center justify-between z-50 md:hidden"
+        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav grid grid-cols-5 items-center z-50 md:hidden"
       >
-        {/* Liquid Sliding Thumb */}
-        <div
-          className="liquid-nav-thumb pointer-events-none"
+        {/* Sliding Thumb */}
+        <span
+          className="glass-thumb pointer-events-none"
           style={{
-            left: `calc(${activeIndex} * (100% / ${mobileBottomNavItems.length}) + 4px)`,
-            width: `calc((100% / ${mobileBottomNavItems.length}) - 8px)`,
+            transform: `translateX(calc(${activeIndex} * 100%))`,
+            width: `calc(100% / ${mobileBottomNavItems.length})`,
           }}
         />
 
@@ -202,13 +202,9 @@ export const ClientLayout: React.FC = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={cn(
-                'flex-1 py-2 px-1 text-center font-sans tracking-tight transition-all duration-300 relative z-10',
-                'liquid-nav-label',
-                isActive ? 'active' : ''
-              )}
+              className={cn('glass-label', isActive && 'on')}
             >
-              <span className="inline-block text-[12px]">{item.label}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}

@@ -126,10 +126,10 @@ export const LawyerLayout: React.FC = () => {
         </main>
       </div>
 
-      {/* Mobile Floating Bottom Navigation Bar (Ultra-Realistic Liquid Glass Toggle) */}
+      {/* Mobile Floating Bottom Navigation Bar (Exact Liquid Glass Toggle) */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-4 inset-x-4 max-w-md mx-auto liquid-glass-nav p-1 flex items-center justify-between z-50 md:hidden"
+        className="fixed bottom-3.5 inset-x-4 max-w-sm mx-auto glass-nav grid grid-cols-5 items-center z-50 md:hidden"
       >
         {mobileBottomNavItems.map((item) => {
           const isActive = location.pathname === item.path;
@@ -137,13 +137,9 @@ export const LawyerLayout: React.FC = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={cn(
-                'flex-1 py-2 px-1 text-center font-sans tracking-tight transition-all duration-300 relative z-10',
-                'liquid-nav-label',
-                isActive ? 'active' : ''
-              )}
+              className={cn('glass-label', isActive && 'on')}
             >
-              <span className="inline-block text-[12px]">{item.label}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}
