@@ -15,6 +15,7 @@ export const ROUTES = {
     DISCLAIMER: '/disclaimer',
   },
   CLIENT: {
+    ROOT: '/client',
     DASHBOARD: '/client/dashboard',
     LAWYERS: '/client/lawyers',
     CONSULTATIONS: '/client/consultations',

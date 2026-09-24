@@ -90,6 +90,7 @@ export const AppRoutes: React.FC = () => {
         {/* Protected Client Routes */}
         <Route element={<ProtectedRoute requiredRole="client" />}>
           <Route element={<ClientLayout />}>
+            <Route path="/client" element={<ClientDashboardPage />} />
             <Route path={ROUTES.CLIENT.DASHBOARD} element={<ClientDashboardPage />} />
             <Route path={ROUTES.CLIENT.LAWYERS} element={<ClientLawyersPage />} />
             <Route path={ROUTES.CLIENT.CONSULTATIONS} element={<ClientConsultationsPage />} />
@@ -109,6 +110,7 @@ export const AppRoutes: React.FC = () => {
         {/* Protected Lawyer Routes */}
         <Route element={<ProtectedRoute requiredRole="lawyer" />}>
           <Route element={<LawyerLayout />}>
+            <Route path="/lawyer" element={<LawyerDashboardPage />} />
             <Route path={ROUTES.LAWYER.DASHBOARD} element={<LawyerDashboardPage />} />
             <Route path={ROUTES.LAWYER.REQUESTS} element={<LawyerRequestsPage />} />
             <Route path={ROUTES.LAWYER.CLIENTS} element={<LawyerClientsPage />} />
@@ -127,6 +129,7 @@ export const AppRoutes: React.FC = () => {
         {/* Protected Admin Routes */}
         <Route element={<ProtectedRoute requiredRole="admin" />}>
           <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboardPage />} />
             <Route path={ROUTES.ADMIN.DASHBOARD} element={<AdminDashboardPage />} />
             <Route path={ROUTES.ADMIN.USERS} element={<AdminUsersPage />} />
             <Route path={ROUTES.ADMIN.LAWYERS} element={<AdminLawyersPage />} />
