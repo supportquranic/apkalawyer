@@ -13,8 +13,7 @@ import {
   CreditCard, 
   Bell, 
   User, 
-  LogOut,
-  ArrowUpRight
+  LogOut
 } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { cn } from '@/lib/utils';
@@ -38,24 +37,27 @@ export const ClientLayout: React.FC = () => {
     { label: 'Profile', path: ROUTES.CLIENT.PROFILE, icon: User },
   ];
 
-  // Minimal 5-item mobile bottom navigation
+  // 5-item mobile floating bottom navigation
   const mobileBottomNavItems = [
     { label: 'Home', path: ROUTES.CLIENT.DASHBOARD, icon: LayoutDashboard },
     { label: 'Lawyers', path: ROUTES.CLIENT.LAWYERS, icon: Users },
     { label: 'Consults', path: ROUTES.CLIENT.CONSULTATIONS, icon: Calendar },
-    { label: 'Messages', path: ROUTES.CLIENT.MESSAGES, icon: MessageSquare },
+    { label: 'Matters', path: ROUTES.CLIENT.MATTERS, icon: Briefcase },
     { label: 'Profile', path: ROUTES.CLIENT.PROFILE, icon: User },
   ];
 
   return (
-    <div className="min-h-screen flex bg-neutral-50/50 text-black">
+    <div className="min-h-screen flex bg-[#F9FAFB] text-black">
       {/* Desktop Minimal Sidebar */}
       <aside className="w-60 bg-white text-neutral-800 flex flex-col border-r border-neutral-200 hidden md:flex">
         {/* Brand Header */}
         <div className="h-16 flex items-center px-6 border-b border-neutral-100">
-          <Link to={ROUTES.PUBLIC.HOME} className="flex items-center gap-2">
+          <Link to={ROUTES.CLIENT.DASHBOARD} className="flex items-center gap-2">
             <span className="font-bold text-base tracking-tight text-black">
               Apka<span className="font-normal text-neutral-500">Lawyer</span>
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-black text-white px-1.5 py-0.5 rounded">
+              App
             </span>
           </Link>
         </div>
@@ -110,23 +112,43 @@ export const ClientLayout: React.FC = () => {
       </aside>
 
       {/* Main Content Viewport */}
-      <div className="flex-1 flex flex-col min-w-0 pb-20 md:pb-6">
-        {/* Compact Top Header */}
-        <header className="h-14 bg-white border-b border-neutral-200 px-4 sm:px-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-sm text-black">Client Workspace</span>
+      <div className="flex-1 flex flex-col min-w-0 pb-24 md:pb-6">
+        {/* Compact App Header */}
+        <header className="h-14 bg-white border-b border-neutral-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+          <div className="flex items-center gap-2.5">
+            <span className="font-bold text-sm text-black tracking-tight flex items-center gap-1.5">
+              Apka<span className="font-normal text-neutral-500">Lawyer</span>
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-100 text-neutral-700 px-1.5 py-0.5 rounded border border-neutral-200/80">
+              Verified
+            </span>
           </div>
-          <Link
-            to={ROUTES.PUBLIC.HOME}
-            className="text-xs text-neutral-500 hover:text-black flex items-center gap-1 font-medium transition-colors"
-          >
-            Public Site
-            <ArrowUpRight className="h-3 w-3" />
-          </Link>
+          
+          <div className="flex items-center gap-2">
+            <Link
+              to={ROUTES.CLIENT.NOTIFICATIONS}
+              className="relative p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-full transition-colors"
+              aria-label="Notifications"
+            >
+              <Bell className="h-4 w-4" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-black ring-2 ring-white" />
+            </Link>
+            <Link
+              to={ROUTES.CLIENT.PROFILE}
+              className="flex items-center gap-2 p-1 rounded-full hover:bg-neutral-100 transition-colors"
+              aria-label="Profile"
+            >
+              <img
+                src={user?.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                alt="Profile"
+                className="h-7 w-7 rounded-full object-cover border border-neutral-200"
+              />
+            </Link>
+          </div>
         </header>
 
         {/* Content Body */}
-        <main className="flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3.5 sm:p-6 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
       </div>
@@ -134,22 +156,24 @@ export const ClientLayout: React.FC = () => {
       {/* Mobile Floating Bottom Navigation Bar */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-3 inset-x-3 max-w-md mx-auto bg-white/95 backdrop-blur-md border border-neutral-200 shadow-sm rounded-2xl px-2 py-1.5 flex items-center justify-around z-50 md:hidden"
+        className="fixed bottom-3 inset-x-4 max-w-md mx-auto bg-black text-white shadow-xl shadow-black/20 rounded-full px-3 py-2 flex items-center justify-around z-50 md:hidden border border-neutral-800"
       >
         {mobileBottomNavItems.map((item) => {
           const Icon = item.icon;
-          const isActive = location.pathname === item.path;
+          const isActive = location.pathname === item.path || (item.path !== ROUTES.CLIENT.DASHBOARD && location.pathname.startsWith(item.path));
           return (
             <Link
               key={item.path}
               to={item.path}
               className={cn(
-                'flex flex-col items-center justify-center py-1 px-3 rounded-xl text-[10px] transition-colors',
-                isActive ? 'text-black font-semibold' : 'text-neutral-400 hover:text-neutral-700'
+                'flex flex-col items-center justify-center py-1 px-3 rounded-full text-[10px] transition-all',
+                isActive 
+                  ? 'text-white font-bold bg-neutral-800 scale-105' 
+                  : 'text-neutral-400 hover:text-white'
               )}
             >
-              <Icon className={cn('h-4 w-4 mb-0.5', isActive ? 'text-black' : 'text-neutral-400')} />
-              <span>{item.label}</span>
+              <Icon className={cn('h-4 w-4 mb-0.5', isActive ? 'text-white' : 'text-neutral-400')} />
+              <span className="leading-tight">{item.label}</span>
             </Link>
           );
         })}
