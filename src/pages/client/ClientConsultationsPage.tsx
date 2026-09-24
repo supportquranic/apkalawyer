@@ -51,7 +51,6 @@ export const ClientConsultationsPage: React.FC = () => {
   const [isComposerOpen, setIsComposerOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
-  const [newUrduContent, setNewUrduContent] = useState('');
   const [newCategory, setNewCategory] = useState('Property & Land Dispute');
   const [attachedImages, setAttachedImages] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -136,13 +135,11 @@ export const ClientConsultationsPage: React.FC = () => {
       category: newCategory,
       title: newTitle.trim(),
       content: newContent.trim(),
-      urduContent: newUrduContent.trim() || undefined,
       images: attachedImages
     });
 
     setNewTitle('');
     setNewContent('');
-    setNewUrduContent('');
     setAttachedImages([]);
     setIsComposerOpen(false);
     setIsSubmitting(false);
@@ -308,36 +305,23 @@ export const ClientConsultationsPage: React.FC = () => {
           <div>
             <input
               type="text"
-              placeholder="Brief summary of your legal matter / dispute..."
+              placeholder="Brief summary or question (English / اردو)..."
               value={newTitle}
+              dir="auto"
               onChange={(e) => setNewTitle(e.target.value)}
               className="w-full text-sm font-bold placeholder:text-neutral-400 text-black border border-neutral-200 rounded-xl px-3.5 py-2.5 outline-none focus:border-black transition-colors"
             />
           </div>
 
-          {/* English description */}
+          {/* Single Natural Content Box (English / Urdu) */}
           <div>
             <textarea
-              rows={3}
-              placeholder="Explain your situation in detail (Facts, documents available, questions for advocates)..."
+              rows={4}
+              dir="auto"
+              placeholder="Write your question, matter, or legal dispute in English or اردو..."
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
-              className="w-full text-xs font-normal placeholder:text-neutral-400 text-black border border-neutral-200 rounded-xl p-3 outline-none focus:border-black transition-colors resize-none"
-            />
-          </div>
-
-          {/* Optional Urdu text */}
-          <div className="bg-neutral-50 p-2.5 rounded-xl border border-neutral-200/80">
-            <label className="block text-[11px] font-semibold text-neutral-500 mb-1">
-              اردو تفصیل (اختیاری / Optional Urdu Description):
-            </label>
-            <textarea
-              rows={2}
-              dir="rtl"
-              placeholder="اپنا قانونی مسئلہ اردو میں لکھیں تاکہ وکلاء بہتر رہنمائی کر سکیں..."
-              value={newUrduContent}
-              onChange={(e) => setNewUrduContent(e.target.value)}
-              className="w-full text-xs font-sans text-right placeholder:text-neutral-400 text-black bg-white border border-neutral-200 rounded-lg p-2.5 outline-none focus:border-black resize-none"
+              className="w-full text-xs sm:text-sm font-normal placeholder:text-neutral-400 text-black border border-neutral-200 rounded-xl p-3 outline-none focus:border-black transition-colors resize-none leading-relaxed"
             />
           </div>
 
@@ -345,7 +329,7 @@ export const ClientConsultationsPage: React.FC = () => {
           {attachedImages.length > 0 && (
             <div className="space-y-1">
               <p className="text-[11px] font-semibold text-neutral-500">
-                Attached Documents / Evidence ({attachedImages.length}/2):
+                Attached Images / Documents ({attachedImages.length}/2):
               </p>
               <div className="grid grid-cols-2 gap-2">
                 {attachedImages.map((img, idx) => (
@@ -366,22 +350,20 @@ export const ClientConsultationsPage: React.FC = () => {
 
           {/* Actions footer */}
           <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleAddImage}
-                disabled={attachedImages.length >= 2}
-                className={cn(
-                  'flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-neutral-200 transition-colors',
-                  attachedImages.length >= 2
-                    ? 'opacity-40 cursor-not-allowed bg-neutral-100 text-neutral-400'
-                    : 'bg-white hover:bg-neutral-50 text-neutral-700'
-                )}
-              >
-                <ImageIcon className="h-3.5 w-3.5" />
-                <span>Attach Image (Max 2)</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleAddImage}
+              disabled={attachedImages.length >= 2}
+              className={cn(
+                'flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-neutral-200 transition-colors',
+                attachedImages.length >= 2
+                  ? 'opacity-40 cursor-not-allowed bg-neutral-100 text-neutral-400'
+                  : 'bg-white hover:bg-neutral-50 text-neutral-700'
+              )}
+            >
+              <ImageIcon className="h-3.5 w-3.5" />
+              <span>Attach Image (Max 2)</span>
+            </button>
 
             <button
               type="submit"
@@ -444,7 +426,7 @@ export const ClientConsultationsPage: React.FC = () => {
                 <article
                   key={thread.id}
                   id={thread.id}
-                  className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-xs hover:border-neutral-300 transition-all space-y-3.5"
+                  className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-5 shadow-xs hover:border-neutral-300 transition-all space-y-3"
                 >
                   {/* Post Author Bar */}
                   <div className="flex items-start justify-between gap-2">
@@ -477,28 +459,15 @@ export const ClientConsultationsPage: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Title & English Content */}
+                  {/* Title & Unified Content (Supports English / Urdu naturally) */}
                   <div className="space-y-1.5">
-                    <h2 className="text-sm sm:text-base font-bold text-black tracking-tight leading-snug">
+                    <h2 dir="auto" className="text-sm sm:text-base font-bold text-black tracking-tight leading-snug">
                       {thread.title}
                     </h2>
-                    <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
+                    <p dir="auto" className="text-xs sm:text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
                       {thread.content}
                     </p>
                   </div>
-
-                  {/* Optional Urdu Content Block */}
-                  {thread.urduContent && (
-                    <div
-                      dir="rtl"
-                      className="p-3 rounded-xl bg-neutral-50/90 border border-neutral-200 text-right text-xs sm:text-sm font-sans leading-relaxed text-black"
-                    >
-                      <span className="text-[10px] font-bold uppercase text-neutral-400 block mb-1">
-                        اردو تفصیل:
-                      </span>
-                      <p>{thread.urduContent}</p>
-                    </div>
-                  )}
 
                   {/* Attached Images (Strict Max 2 per post) */}
                   {thread.images && thread.images.length > 0 && (
@@ -521,7 +490,7 @@ export const ClientConsultationsPage: React.FC = () => {
                             className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
                           />
                           <span className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium px-2 py-0.5 rounded-full">
-                            Tap to Zoom
+                            Click to open
                           </span>
                         </button>
                       ))}
@@ -626,18 +595,9 @@ export const ClientConsultationsPage: React.FC = () => {
                                 <span className="text-[10px] text-neutral-400">{advice.createdAt}</span>
                               </div>
 
-                              <p className="text-xs text-neutral-800 leading-relaxed">
+                              <p dir="auto" className="text-xs text-neutral-800 leading-relaxed">
                                 {advice.content}
                               </p>
-
-                              {advice.urduContent && (
-                                <p
-                                  dir="rtl"
-                                  className="text-xs font-sans text-neutral-900 border-t border-neutral-200/60 pt-1.5 text-right"
-                                >
-                                  {advice.urduContent}
-                                </p>
-                              )}
                             </div>
                           ))}
                         </div>
@@ -647,7 +607,8 @@ export const ClientConsultationsPage: React.FC = () => {
                       <div className="flex items-center gap-2 pt-2">
                         <input
                           type="text"
-                          placeholder="Write professional legal advice or citation for this client..."
+                          dir="auto"
+                          placeholder="Write professional legal advice (English / اردو)..."
                           value={adviceInputs[thread.id] || ''}
                           onChange={(e) =>
                             setAdviceInputs((prev) => ({
@@ -730,7 +691,7 @@ export const ClientConsultationsPage: React.FC = () => {
                       <span className="text-[10px] font-bold uppercase text-neutral-400 block mb-0.5">
                         {thread.category} • Posted {thread.createdAt}
                       </span>
-                      <h3 className="text-sm sm:text-base font-bold text-black">{thread.title}</h3>
+                      <h3 dir="auto" className="text-sm sm:text-base font-bold text-black">{thread.title}</h3>
                     </div>
                     <span className="text-[10px] font-bold bg-neutral-100 text-black px-2.5 py-1 rounded-full border border-neutral-200 flex-shrink-0">
                       {thread.offers?.length || 0} Offers Received
@@ -762,7 +723,7 @@ export const ClientConsultationsPage: React.FC = () => {
                               <p className="text-[11px] text-neutral-500">
                                 {offer.lawyerTitle} • {offer.experienceYears} Yrs Exp • {offer.city}
                               </p>
-                              <p className="text-xs text-neutral-800 italic pt-1">
+                              <p dir="auto" className="text-xs text-neutral-800 italic pt-1">
                                 "{offer.message}"
                               </p>
                             </div>
@@ -819,7 +780,7 @@ export const ClientConsultationsPage: React.FC = () => {
             </div>
 
             <div className="bg-neutral-50 p-3 rounded-xl text-xs space-y-1">
-              <p className="font-semibold text-black">{activeOfferThread.title}</p>
+              <p dir="auto" className="font-semibold text-black">{activeOfferThread.title}</p>
               <p className="text-neutral-500 text-[11px]">
                 Target Client: {activeOfferThread.authorName} • {activeOfferThread.authorCity}
               </p>
@@ -847,9 +808,10 @@ export const ClientConsultationsPage: React.FC = () => {
               </label>
               <textarea
                 rows={3}
+                dir="auto"
                 value={offerMessage}
                 onChange={(e) => setOfferMessage(e.target.value)}
-                placeholder="Explain how you can handle this case and your availability for court representation..."
+                placeholder="Explain how you can handle this case (English or اردو)..."
                 className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl p-2.5 outline-none focus:border-black resize-none"
               />
             </div>

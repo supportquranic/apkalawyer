@@ -9,8 +9,7 @@ export const initialMockThreads: LegalThread[] = [
     authorCity: 'Lahore, Punjab',
     category: 'Property & Land Dispute',
     title: 'Disputed possession of ancestral inherited agricultural land in Sheikhupura',
-    content: 'My late grandfather left 16 acres of registered agricultural land with a clear Fard Malkiat. Recent mutation (Intiqal) was secretly transferred to my distant relatives without my mother’s required legal consent. We have original Registry papers and Khasra Girdawari from 1998 onwards. Need urgent advice on filing a Suit for Declaration and obtaining a Stay Order before they harvest or sell the land.',
-    urduContent: 'ہمارے دادا کی وراثتی زمین پر دوسرے رشتہ داروں نے والدہ کی رضامندی کے بغیر خفیہ انتقال کروا لیا ہے۔ ہمارے پاس فرد ملکیت اور پرانی گرداوری موجود ہے۔ براہ کرم فوری حکم امتناعی (Stay Order) اور دعویٰ استقرار حق دائر کرنے کی قانونی رہنمائی فرمائیں۔',
+    content: 'My late grandfather left 16 acres of registered agricultural land with a clear Fard Malkiat. Recent mutation (Intiqal) was secretly transferred without my mother’s required legal consent. Need urgent advice on filing a Suit for Declaration and obtaining a Stay Order before harvest.',
     images: [
       'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800',
       'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800'
@@ -29,8 +28,7 @@ export const initialMockThreads: LegalThread[] = [
         experienceYears: 16,
         city: 'Lahore',
         isVerified: true,
-        content: 'Under Section 42 of the Specific Relief Act 1877, file a Suit for Declaration immediately before the Civil Judge in Sheikhupura. Concurrently attach an application under Order 39 Rules 1 & 2 CPC for an ad-interim injunction (Stay Order) citing irreparable loss. Also present your certified Fard and summon the Patwari record for verification.',
-        urduContent: 'سول جج کی عدالت میں فوری دعویٰ استقرار حق اور آرڈر 39 رول 1 و 2 کے تحت حکم امتناعی کی درخواست دائر کریں۔ پٹوار ریکارڈ اور فرد ملکیت کو فوری ریکارڈ پر لائیں۔',
+        content: 'Under Section 42 of Specific Relief Act 1877, file a Suit for Declaration immediately before Civil Judge Sheikhupura with an Order 39 Rules 1 & 2 application for ad-interim injunction (Stay Order).',
         createdAt: '1 hour ago',
         upvotes: 18,
       },
@@ -43,7 +41,7 @@ export const initialMockThreads: LegalThread[] = [
         experienceYears: 11,
         city: 'Lahore',
         isVerified: true,
-        content: 'Also lodge a formal challenge before the Additional Deputy Commissioner (Revenue) / Collector under Section 161 of the Land Revenue Act 1967 against the fraudulent Mutation. Once the revenue appeal is acknowledged, civil stay becomes much easier to obtain.',
+        content: 'Also lodge a revenue challenge before ADC(R) under Section 161 of Land Revenue Act 1967 against the fraudulent Mutation.',
         createdAt: '45 mins ago',
         upvotes: 9,
       }
@@ -70,9 +68,8 @@ export const initialMockThreads: LegalThread[] = [
     authorAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
     authorCity: 'Karachi, Sindh',
     category: 'Corporate & Contract Breach',
-    title: 'Software company vendor not releasing payment after milestone approval and signed SLA',
-    content: 'Our IT consultancy signed a formal Service Level Agreement (SLA) with an offshore client’s registered Pakistani subsidiary in Karachi. We delivered Phase 1 & Phase 2 with explicit email sign-offs and invoice acceptance. Total pending PKR 2.4 Million is overdue for 75 days. What is the fastest legal recourse — Legal Notice under Negotiable Instruments / CPC Summary Suit or Arbitration under PECA / Arbitration Act?',
-    urduContent: 'ہماری آئی ٹی کمپنی کا کسٹمر کے ساتھ باضابطہ معاہدہ تھا اور مائل اسٹون کی منظوری کے بعد بھی 24 لاکھ روپے کی ادائیگی گزشتہ ڈھائی ماہ سے رکی ہوئی ہے۔ فوری قانونی کارروائی کیلئے رہنمائی فرمائیں۔',
+    title: 'Software vendor pending PKR 2.4M payment after approved SLA milestone',
+    content: 'Our IT consultancy signed a formal SLA with an offshore client subsidiary in Karachi. We delivered Phase 1 & 2 with sign-offs. Overdue for 75 days. What is the fastest legal recourse — Legal Notice under Contract Act or Order 37 CPC Summary Suit?',
     images: [
       'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800'
     ],
@@ -90,7 +87,7 @@ export const initialMockThreads: LegalThread[] = [
         experienceYears: 14,
         city: 'Karachi',
         isVerified: true,
-        content: 'First step: Issue a formal Legal Demand Notice with a strict 14-day cure period under Section 73 of the Contract Act 1872. If unpaid, file a Summary Suit for Recovery under Order 37 CPC at the Sindh High Court / District Court. In 80% of corporate breach matters, the respondent settles upon receiving a formal Advocate Legal Notice.',
+        content: 'First step: Issue a formal Legal Demand Notice with a strict 14-day cure period under Section 73 of the Contract Act 1872. If unpaid, file a Summary Suit for Recovery under Order 37 CPC at the District / High Court.',
         createdAt: '3 hours ago',
         upvotes: 14,
       }
@@ -117,9 +114,8 @@ export const initialMockThreads: LegalThread[] = [
     authorAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
     authorCity: 'Islamabad Capital Territory',
     category: 'Family & Khula / Maintenance',
-    title: 'Procedure for Khula decree and recovery of prompt Dower (Haq Mehr) & Child Maintenance',
-    content: 'Married for 4 years with one 2-year-old child. Husband moved abroad and has stopped providing financial maintenance (Nafqa) for the past 9 months. The Nikahnama clearly states gold sets and 15 Tolas prompt Dower as unpaid. Can I file simultaneous petitions for Khula, Recovery of Dowry Articles, and Child Maintenance in the Family Court Islamabad?',
-    urduContent: 'نکاح نامے میں حق مہر معجل درج ہے۔ شوہر گزشتہ 9 ماہ سے نان نفقہ نہیں دے رہا۔ کیا فیملی کورٹ میں خلع، خرچہ نان نفقہ اور سامان جہیز کا دعویٰ بیک وقت کیا جا سکتا ہے؟',
+    title: 'نکاح نامے میں درج حق مہر اور بچے کے نان نفقہ کا دعویٰ',
+    content: 'شوہر گزشتہ 9 ماہ سے بغیر خرچہ نان نفقہ کے باہر مقیم ہے۔ نکاح نامے میں حق مہر معجل درج ہے۔ کیا فیملی کورٹ اسلام آباد میں خلع، سامان جہیز اور خرچے کا متفقہ دعویٰ دائر ہو سکتا ہے؟',
     images: [],
     createdAt: '1 day ago',
     helpfulCount: 56,
@@ -135,8 +131,7 @@ export const initialMockThreads: LegalThread[] = [
         experienceYears: 12,
         city: 'Islamabad',
         isVerified: true,
-        content: 'Yes! Under Section 7 of the Family Courts Act 1964, you can file a consolidated Plaint before the Family Court including: (1) Dissolution of Marriage via Khula, (2) Recovery of prompt Dower & Dowry items, and (3) Past & future Child Maintenance under Section 9. The court will grant interim maintenance order on the second hearing.',
-        urduContent: 'جی ہاں! فیملی کورٹس ایکٹ 1964 کے تحت آپ خلع، سامان جہیز، حق مہر اور بچے کے ماہانہ خرچ کا متفقہ دعویٰ ایک ہی عدالت میں دائر کر سکتی ہیں۔ دوسری پیشی پر ہی عبوری خرچ مقرر ہو جاتا ہے۔',
+        content: 'جی ہاں! فیملی کورٹس ایکٹ 1964 کے تحت آپ خلع، سامان جہیز، حق مہر اور بچے کے ماہانہ خرچ کا متفقہ دعویٰ ایک ہی عدالت میں دائر کر سکتی ہیں۔ دوسری پیشی پر ہی عبوری خرچ مقرر ہو جاتا ہے۔',
         createdAt: '20 hours ago',
         upvotes: 27,
       }
@@ -163,9 +158,8 @@ export const initialMockThreads: LegalThread[] = [
     authorAvatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150',
     authorCity: 'Rawalpindi, Punjab',
     category: 'Cybercrime & Defamation',
-    title: 'Fake social media accounts spreading malicious forged documents under PECA Act 2016',
-    content: 'An anonymous syndicate has created cloned Instagram and WhatsApp handles using my business logo and defamatory forged receipts to harass my clients. We already took digital forensic timestamped screenshots and URL archives. How quickly can we file a petition with FIA Cyber Crime Wing (CCRC) and simultaneously file a damages suit under the Defamation Ordinance 2002?',
-    urduContent: 'سوشل میڈیا پر جعلی اکاؤنٹس بنا کر ہمارے کاروبار کے خلاف جھوٹا پراپیگنڈا کیا جا رہا ہے۔ ایف آئی اے سائبر کرائم اور ہتک عزت کے مقدمے کا قانونی طریقہ کار کیا ہے؟',
+    title: 'Fake cloned accounts spreading defamatory forged documents under PECA Act',
+    content: 'Anonymous syndicate created cloned Instagram accounts using our company logo and defamatory receipts. We have timestamped evidence. How to file an immediate complaint with FIA Cyber Crime Wing (CCRC)?',
     images: [
       'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800'
     ],
@@ -183,7 +177,7 @@ export const initialMockThreads: LegalThread[] = [
         experienceYears: 9,
         city: 'Rawalpindi / Islamabad',
         isVerified: true,
-        content: 'Immediately submit a complaint under Section 20 (Offences against dignity of natural person) and Section 24 (Cyber stalking) of PECA 2016 at the nearest FIA Cyber Crime Reporting Centre with IP logs and Hash certificates. We can also seek urgent Section 14 interim injunction from the District Sessions Court to take down malicious posts.',
+        content: 'Immediately submit a complaint under Section 20 and 24 of PECA 2016 at the nearest FIA Cyber Crime Reporting Centre with digital evidence logs.',
         createdAt: '1 day ago',
         upvotes: 11,
       }
