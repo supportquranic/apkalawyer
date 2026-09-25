@@ -79,7 +79,7 @@ export const ClientDashboardPage: React.FC = () => {
         <div className="flex flex-col gap-2.5 sm:gap-4">
           {/* Top Right Card: Video Consultation */}
           <Link
-            to={ROUTES.CLIENT.CONSULTATIONS}
+            to={`${ROUTES.CLIENT.LAWYERS}?filter=video`}
             className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-white text-black p-3.5 sm:p-5 shadow-xs hover:shadow-md transition-all duration-300 border border-neutral-200 flex-1 flex flex-col justify-between min-h-[150px] sm:min-h-[215px]"
           >
             {/* Clean Corner Visual */}
@@ -111,7 +111,7 @@ export const ClientDashboardPage: React.FC = () => {
             </div>
           </Link>
 
-          {/* Bottom Right Card: Draft Legal Notice */}
+          {/* Bottom Right Card: Draft Legal Documents */}
           <Link
             to={ROUTES.CLIENT.LEGAL_DOCUMENTS}
             className="group relative overflow-hidden rounded-2xl sm:rounded-[2rem] bg-white text-black p-3.5 sm:p-5 shadow-xs hover:shadow-md transition-all duration-300 border border-neutral-200 flex-1 flex flex-col justify-between min-h-[150px] sm:min-h-[215px]"
@@ -120,7 +120,7 @@ export const ClientDashboardPage: React.FC = () => {
             <div className="absolute right-1 bottom-1 sm:right-2 sm:bottom-2 w-20 h-20 sm:w-28 sm:h-28 opacity-25 pointer-events-none">
               <img
                 src="/images/card-legal-notice.webp"
-                alt="Draft Legal Notice"
+                alt="Draft Legal Documents"
                 className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -132,7 +132,7 @@ export const ClientDashboardPage: React.FC = () => {
                 <span>Legal Drafter</span>
               </div>
               <h3 className="text-sm sm:text-xl font-bold text-black tracking-tight leading-snug">
-                Draft Legal Notice
+                Draft Legal Documents
               </h3>
             </div>
 

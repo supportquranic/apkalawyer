@@ -45,6 +45,23 @@ export interface ToolOption {
 export const FREE_LEGAL_TOOLS: ToolOption[] = [
   // 1. LEGAL NOTICES
   {
+    id: 'notice_general',
+    category: 'notice',
+    categoryLabel: 'Legal Notice',
+    title: 'General Legal Notice (All-Purpose)',
+    statute: 'Contract Act 1872 & Code of Civil Procedure 1908',
+    description: 'Draft a formal legal notice for any civil, commercial, or personal dispute — demand compliance, payment, or specific performance.',
+    defaultFields: {
+      partyA: 'Your Name / Company',
+      partyB: 'Recipient Name / Company',
+      city: 'Lahore, Pakistan',
+      amount: '0',
+      referenceNo: '',
+      summary: 'Describe the matter, facts, and relief sought in your own words.',
+      noticeDays: '14'
+    }
+  },
+  {
     id: 'notice_cheque_489f',
     category: 'notice',
     categoryLabel: 'Legal Notice',

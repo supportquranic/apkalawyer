@@ -22,7 +22,7 @@ export const DEMO_USERS: Record<string, User> = {
     city: 'Lahore',
     cnicMasked: '35202-*******-3',
     isVerified: true,
-    avatarUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=150&auto=format&fit=crop&q=80',
+    avatarUrl: '/images/lawyers/lawyer-01.jpg',
     createdAt: '2023-01-15T09:00:00Z',
   },
   admin: {
