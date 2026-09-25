@@ -75,7 +75,7 @@ export const ClientLawyersPage: React.FC = () => {
     if (activeTab === 'video') {
       // In our platform all active verified advocates support video consultation
     } else if (activeTab === 'supreme') {
-      if (lawyer.courtEnrollment !== 'Supreme Court') return false;
+      if (lawyer.courtEnrollment !== 'Supreme Court of Pakistan') return false;
     } else if (activeTab === 'high') {
       if (lawyer.courtEnrollment !== 'High Court') return false;
     }
@@ -178,7 +178,7 @@ export const ClientLawyersPage: React.FC = () => {
             { id: 'all', label: 'All Advocates', count: lawyers.length },
             { id: 'video', label: '📹 Video Consultation', count: lawyers.length },
             { id: 'high', label: 'High Court', count: lawyers.filter((l) => l.courtEnrollment === 'High Court').length },
-            { id: 'supreme', label: 'Supreme Court', count: lawyers.filter((l) => l.courtEnrollment === 'Supreme Court').length },
+            { id: 'supreme', label: 'Supreme Court', count: lawyers.filter((l) => l.courtEnrollment === 'Supreme Court of Pakistan').length },
           ].map((tab) => {
             const isActive = activeTab === tab.id;
             return (

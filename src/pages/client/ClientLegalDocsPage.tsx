@@ -36,7 +36,7 @@ export const ClientLegalDocsPage: React.FC = () => {
     : FREE_LEGAL_TOOLS.filter((t) => t.category === activeCategoryFilter);
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-16">
+    <div className="space-y-6 max-w-5xl mx-auto pb-16">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-4 py-2.5 rounded-full text-xs font-semibold shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-300">
